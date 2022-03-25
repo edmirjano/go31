@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { JoshuaService } from '../services/joshua/joshua.service';
+import { WpService } from '../services/wp/wp.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,17 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    private wp: WpService,
+    private joshua: JoshuaService
+  ) {}
 
+  ngOnInit(): void {
+    this.wp.getLanguages().then((data)=>{
+      console.log(data);
+    })
+    this.joshua.getContents().then((data)=>{
+      console.log(data);
+    })
+  }
 }

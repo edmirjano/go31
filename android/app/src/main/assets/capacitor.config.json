@@ -1,0 +1,6 @@
+{
+	"appId": "al.gremza.go31",
+	"appName": "Go31",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
