@@ -16,4 +16,11 @@ export class WpService extends HttpService {
       return data;
     });
   }
+
+
+  async getSinglePageTest(){
+    return this.get(HttpListModel.testPost).then((data)=>{
+      return data;
+    })
+  }
 }

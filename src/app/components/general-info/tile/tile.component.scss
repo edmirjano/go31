@@ -1,0 +1,18 @@
+ion-card{
+    border-bottom: 1px solid var(--ion-color-primary);
+    margin: 0 2px;
+    .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        .title{
+            color: #6c6b6b;
+            font-size: 12px;
+            margin-bottom: 10%;
+        }
+        .value{
+            color: var(--ion-color-primary);
+        }
+    }
+}

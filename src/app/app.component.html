@@ -1,3 +1,21 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu menuId="appMenu" side="start" type="push" contentId="appContent">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+     <ion-list-header>
+       <ion-label>New This Week</ion-label>
+       <ion-button>See All</ion-button>
+     </ion-list-header>
+     <ion-list>
+       <ion-item>
+         <ion-label>Awesome Label</ion-label>
+       </ion-item>
+     </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="appContent"></ion-router-outlet>
 </ion-app>

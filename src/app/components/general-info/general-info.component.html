@@ -1,0 +1,7 @@
+<ion-grid class="ion-padding-start ion-margin-end">
+  <ion-row class="ion-no-margin ion-no-padding">
+    <ion-col size="4" class="ion-no-margin ion-no-padding" *ngFor="let item of data">
+     <app-tile [title]="item" [value]="item"></app-tile>
+    </ion-col>
+  </ion-row>
+</ion-grid>
