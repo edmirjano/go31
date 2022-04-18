@@ -1,5 +1,5 @@
 export const HttpListModel = {
     languages: "languages",
     joshuaContents: "countries.json",
-    testPost: "posts/33"
+    testPost: "posts/17"
 }

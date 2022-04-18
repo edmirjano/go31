@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActiveSegmentEnum } from 'src/app/models/active-segment-enum';
+import { PostModel } from 'src/app/models/post.model';
 import { JoshuaService } from 'src/app/services/joshua/joshua.service';
 import { WpService } from 'src/app/services/wp/wp.service';
 
@@ -16,7 +17,7 @@ export class SinglePostPage implements OnInit {
   public get ActiveSegmentEnum(){
     return ActiveSegmentEnum;
   }
-  post: any;
+  post: PostModel;
 
   //#endregion
 
@@ -29,8 +30,10 @@ export class SinglePostPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.wp.getSinglePageTest().then((data)=>{
+    this.wp.getSinglePageTest().then((data: PostModel)=>{
+      
       this.post = data;
+      console.log(this.post);
     })
   }
 

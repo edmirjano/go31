@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpListModel } from 'src/app/models/http-list';
+import { PostModel } from 'src/app/models/post.model';
 import { environment } from 'src/environments/environment.prod';
 import { HttpService } from '../http/http.service';
 
@@ -19,7 +20,7 @@ export class WpService extends HttpService {
 
 
   async getSinglePageTest(){
-    return this.get(HttpListModel.testPost).then((data)=>{
+    return this.get(HttpListModel.testPost).then((data: PostModel)=>{
       return data;
     })
   }

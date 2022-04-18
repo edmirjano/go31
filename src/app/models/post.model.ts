@@ -25,7 +25,7 @@ export interface Excerpt {
     rendered: string;
     protected: boolean;
 }
-export interface SinglePostModel {
+export interface PostModel {
     id: number;
     date: Date;
     date_gmt: Date;
