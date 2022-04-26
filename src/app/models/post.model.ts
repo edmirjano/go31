@@ -10,6 +10,7 @@ export interface Acf {
     scripture_focus: string;
     si_also: string;
     the_full_profile: string;
+    country: string;
 }
 export interface Title {
     rendered: string;

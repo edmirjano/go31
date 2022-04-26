@@ -24,10 +24,15 @@
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-<ion-content >
+<ion-content>
   <div *ngIf="post">
-    <app-slider [title]="post.acf.ministry_obstacles" subtitle="Pray for me" content="unreached of the day - April 11" [images]="['https://i0.wp.com/pikaia.eu/wp-content/uploads/2016/10/800px-Giant_Panda_Eating.jpg?w=800&ssl=1']"></app-slider>
+    <app-slider [title]="post.acf.ministry_obstacles" subtitle="Pray for me" content="Unreached of the day - April 11" [images]="['https://i0.wp.com/pikaia.eu/wp-content/uploads/2016/10/800px-Giant_Panda_Eating.jpg?w=800&ssl=1']"></app-slider>
     <app-general-info [data]="generalInfoData"></app-general-info>
+    <ion-button color="primary" fill="outline" class="ion-margin-start ion-margin-top" (click)="play()">
+      <ion-icon name="play-outline" *ngIf="!isPlayingMusic"></ion-icon>
+      <ion-icon name="pause-outline" *ngIf="isPlayingMusic"></ion-icon>
+      Play
+    </ion-button>
     <app-paragraph title="information" [content]="post.acf.information" ></app-paragraph>
     <app-paragraph title="ministry_obstacles" [content]="post.acf.ministry_obstacles" ></app-paragraph>
     <app-paragraph title="outreach_oportunities" [content]="post.acf.outreach_oportunities" ></app-paragraph>
