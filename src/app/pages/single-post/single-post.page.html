@@ -24,20 +24,17 @@
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <app-slider title="Bouei of china" subtitle="Pray for me" content="unreached of the day - April 11" [images]="['https://i0.wp.com/pikaia.eu/wp-content/uploads/2016/10/800px-Giant_Panda_Eating.jpg?w=800&ssl=1']"></app-slider>
-  <app-general-info [data]="['population','2342423']"></app-general-info>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
-  <app-paragraph title="Bouei of china" content="Bouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of chinaBouei of china" ></app-paragraph>
+<ion-content >
+  <div *ngIf="post">
+    <app-slider [title]="post.acf.ministry_obstacles" subtitle="Pray for me" content="unreached of the day - April 11" [images]="['https://i0.wp.com/pikaia.eu/wp-content/uploads/2016/10/800px-Giant_Panda_Eating.jpg?w=800&ssl=1']"></app-slider>
+    <app-general-info [data]="generalInfoData"></app-general-info>
+    <app-paragraph title="information" [content]="post.acf.information" ></app-paragraph>
+    <app-paragraph title="ministry_obstacles" [content]="post.acf.ministry_obstacles" ></app-paragraph>
+    <app-paragraph title="outreach_oportunities" [content]="post.acf.outreach_oportunities" ></app-paragraph>
+    <app-paragraph title="pray_for_the_followers_of_christ" [content]="post.acf.pray_for_the_followers_of_christ" ></app-paragraph>
+    <app-paragraph title="pray_for_the_entire_of_group" [content]="post.acf.pray_for_the_entire_of_group" ></app-paragraph>
+    <app-paragraph title="scripture_focus" [content]="post.acf.scripture_focus" ></app-paragraph>
+    <app-paragraph title="si_also" [content]="post.acf.si_also" ></app-paragraph>
+    <app-paragraph title="the_full_profile" [content]="post.acf.the_full_profile" ></app-paragraph>
+  </div>
 </ion-content>

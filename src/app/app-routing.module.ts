@@ -11,6 +11,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./pages/single-post/single-post.module').then( m => m.SinglePostPageModule)
   },
+  {
+    path: 'setings',
+    loadChildren: () => import('./pages/setings/setings.module').then( m => m.SetingsPageModule)
+  },
 ];
 
 @NgModule({

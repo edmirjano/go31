@@ -6,9 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./general-info.component.scss'],
 })
 export class GeneralInfoComponent implements OnInit {
-  @Input() data: string[];
+  @Input() data: Record<string,string>;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.data);
+    
+  }
 
 }

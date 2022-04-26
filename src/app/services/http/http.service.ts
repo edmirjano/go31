@@ -6,7 +6,7 @@ import { StorageService } from '../storage/storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService extends StorageService{
+export class HttpService extends StorageService {
   constructor(@Inject(String) private _baseurl: string) {
     super();
   }

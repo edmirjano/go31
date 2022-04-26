@@ -9,7 +9,7 @@ import { HttpService } from '../http/http.service';
 })
 export class JoshuaService extends HttpService {
 
-  private readonly _token: string = environment.JOSHUA_TOKEN;
+  private readonly _token = {"api_key": environment.JOSHUA_TOKEN } ;
 
   constructor() {
     super(environment.BASE_URL_JOSHUA);
@@ -17,8 +17,13 @@ export class JoshuaService extends HttpService {
 
 
    getContents(){
-     return this.get(HttpListModel.joshuaContents,false, {"api_key": this._token}).then((data)=>{
+     return this.get(HttpListModel.joshuaContents,false, this._token).then((data)=>{
        return data;
      })
+   }
+   getPost(id: string){
+     return this.get(HttpListModel.joshuaContentId(id),false,this._token).then((data)=>{
+      return data;
+     });
    }
 }
