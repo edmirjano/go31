@@ -1,20 +1,21 @@
 <ion-app>
   <ion-menu menuId="appMenu" side="start" type="push" contentId="appContent">
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="primary">
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-     <!-- <ion-list-header>
+      <!-- <ion-list-header>
        <ion-label>New This Week</ion-label>
        <ion-button>See All</ion-button>
      </ion-list-header> -->
-     <ion-list>
-       <ion-item href="/setings">
-         <ion-label>Settings</ion-label>
-       </ion-item>
-     </ion-list>
+      <ion-list>
+        <ion-item (click)="openSettings()" detail>
+          <ion-icon name="cog-outline"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ion-menu>
   <ion-router-outlet id="appContent"></ion-router-outlet>

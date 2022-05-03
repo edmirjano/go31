@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Select Date</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Time zone</ion-label>
+        <ion-input type="text" [(ngModel)]="userTimeZone"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{ selectedDate | date: "HH:mm"}}</ion-label>
+        <ion-button id="open-date-input">Change</ion-button>
+        <ion-popover #popover trigger="open-date-input" show-backdrop="false">
+          <ng-template>
+            <ion-datetime #time presentation="time" size="cover" [value]="selectedDate"
+              (ionChange)="changeDate(time.value)">
+              <ion-buttons slot="buttons">
+                <ion-button (click)="confirm()" fill="outline" color="primary">Select</ion-button>
+                <ion-button (click)="reset()" fill="outline" color="danger">Reset</ion-button>
+              </ion-buttons>
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

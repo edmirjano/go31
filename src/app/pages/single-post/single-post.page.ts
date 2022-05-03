@@ -17,7 +17,7 @@ export class SinglePostPage implements OnInit {
   activeSegment: ActiveSegmentEnum = ActiveSegmentEnum.profile;
   audioUrl: string = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
   isPlayingMusic: boolean;
-  public ActiveSegmentEnum = ActiveSegmentEnum;
+  // public ActiveSegmentEnum = ActiveSegmentEnum;
   post: PostModel;
   joshuaGroup: Array<JoshuaGroupModel>;
   generalInfoData: Record<string,string>;

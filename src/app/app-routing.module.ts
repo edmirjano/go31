@@ -12,8 +12,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/single-post/single-post.module').then( m => m.SinglePostPageModule)
   },
   {
-    path: 'setings',
-    loadChildren: () => import('./pages/setings/setings.module').then( m => m.SetingsPageModule)
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule)
   },
 ];
 
