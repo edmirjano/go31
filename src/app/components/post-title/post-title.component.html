@@ -1,0 +1,15 @@
+<ion-grid class="ion-margin-start ion-margin-end">
+  <ion-row>
+    <ion-col size="10">
+      <ion-text color="primary">
+        <h3 [innerHtml]="title"></h3>
+      </ion-text>
+    </ion-col>
+    <ion-col size="2">
+      <ion-button color="primary" fill="outline" class="ion-margin-top" (click)="play()">
+        <ion-icon name="play-outline" *ngIf="!isPlayingMusic"></ion-icon>
+        <ion-icon name="pause-outline" *ngIf="isPlayingMusic"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

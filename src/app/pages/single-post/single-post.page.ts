@@ -16,7 +16,6 @@ export class SinglePostPage implements OnInit {
   //#region Properties 
   activeSegment: ActiveSegmentEnum = ActiveSegmentEnum.profile;
   audioUrl: string = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-  isPlayingMusic: boolean;
   // public ActiveSegmentEnum = ActiveSegmentEnum;
   post: PostModel;
   joshuaGroup: Array<JoshuaGroupModel>;
@@ -25,12 +24,10 @@ export class SinglePostPage implements OnInit {
   //#endregion
   constructor(
     private wp: WpService,
-    private joshua: JoshuaService,
-    private player: PlayerService
+    private joshua: JoshuaService
   ) { }
 
   ngOnInit() {
-    this.player._init(this.audioUrl);
   }
 
   ionViewDidEnter() {
@@ -51,14 +48,6 @@ export class SinglePostPage implements OnInit {
   }
 
 
-  play(){
-    if(this.isPlayingMusic){
-      this.player.pause();
-    } else {
-      this.player.play();
-    }
-    this.isPlayingMusic = !this.isPlayingMusic;
-  }
 
   getGeneraInfoData(data: Array<JoshuaGroupModel>){
     let toReturn;
@@ -78,5 +67,8 @@ export class SinglePostPage implements OnInit {
   }
   //#endregion
 
+  onPrayClick(){
+    
+  }
 
 }

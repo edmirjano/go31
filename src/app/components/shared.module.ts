@@ -6,6 +6,7 @@ import { TileComponent } from './general-info/tile/tile.component';
 import { LinkListComponent } from './link-list/link-list.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SliderComponent } from './slider/slider.component';
+import { PostTitleComponent } from './post-title/post-title.component';
 
 @NgModule({
     declarations: [
@@ -13,7 +14,8 @@ import { SliderComponent } from './slider/slider.component';
         TileComponent,
         LinkListComponent,
         ParagraphComponent,
-        SliderComponent
+        SliderComponent,
+        PostTitleComponent
     ],
     imports: [
         CommonModule,
@@ -24,7 +26,8 @@ import { SliderComponent } from './slider/slider.component';
         TileComponent,
         LinkListComponent,
         ParagraphComponent,
-        SliderComponent
+        SliderComponent,
+        PostTitleComponent
     ],
 })
 export class SharedComponentModule { }

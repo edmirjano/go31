@@ -1,16 +1,49 @@
+export interface Sizes {
+    thumbnail: string;
+    medium: string;
+    medium_large: string;
+    large: string;
+    "1536x1536": string;
+    "2048x2048": string;
+    mailpoet_newsletter_max: string;
+}
+
+export interface Image {
+    ID: number;
+    id: number;
+    title: string;
+    filename: string;
+    filesize: number;
+    url: string;
+    link: string;
+    alt: string;
+    author: string;
+    description: string;
+    caption: string;
+    name: string;
+    status: string;
+    uploaded_to: number;
+    date: string;
+    modified: string;
+    menu_order: number;
+    mime_type: string;
+    type: string;
+    subtype: string;
+    icon: string;
+    width: number;
+    height: number;
+    sizes: Sizes;
+}
+
 export interface Acf {
     id: string;
-    image_2: number;
-    image_3: number;
-    information: string;
-    ministry_obstacles: string;
-    outreach_oportunities: string;
-    pray_for_the_followers_of_christ: string;
-    pray_for_the_entire_of_group: string;
-    scripture_focus: string;
-    si_also: string;
-    the_full_profile: string;
     country: string;
+    post_number: string;
+    image_2: Image;
+    image_3: Image;
+    information: string;
+    map: boolean;
+    news: string;
 }
 export interface Title {
     rendered: string;
