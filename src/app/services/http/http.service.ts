@@ -22,7 +22,7 @@ export class HttpService extends StorageService {
       "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"
     };
     const response: HttpResponse = await Http.get({url: this._baseurl + endpoint, headers, params});
-    this.setSingleObject(endpoint,JSON.stringify(response.data));
+    // this.setSingleObject(endpoint,JSON.stringify(response.data));
     return response.data;
   }
 

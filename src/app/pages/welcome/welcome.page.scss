@@ -1,0 +1,17 @@
+.background{
+    background-image: url("../../../assets/firsback.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.flags{
+    bottom: 9%;
+    position: absolute;
+
+    img{
+        height: 65% !important; 
+        width: auto;
+    }
+}
