@@ -26,4 +26,10 @@ export class JoshuaService extends HttpService {
       return data;
      });
    }
+
+   getCountry(id: string){
+    return this.get(HttpListModel.joshuaCountryId(id),false,this._token).then((data)=>{
+      return data;
+     });
+   }
 }

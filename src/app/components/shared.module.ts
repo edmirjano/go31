@@ -7,6 +7,7 @@ import { LinkListComponent } from './link-list/link-list.component';
 import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SliderComponent } from './slider/slider.component';
 import { PostTitleComponent } from './post-title/post-title.component';
+import { OptionsPopoverComponent } from './options-popover/options-popover.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { PostTitleComponent } from './post-title/post-title.component';
         LinkListComponent,
         ParagraphComponent,
         SliderComponent,
-        PostTitleComponent
+        PostTitleComponent,
+        OptionsPopoverComponent
     ],
     imports: [
         CommonModule,
@@ -27,7 +29,8 @@ import { PostTitleComponent } from './post-title/post-title.component';
         LinkListComponent,
         ParagraphComponent,
         SliderComponent,
-        PostTitleComponent
+        PostTitleComponent,
+        OptionsPopoverComponent
     ],
 })
 export class SharedComponentModule { }

@@ -5,5 +5,7 @@ export const HttpListModel = {
     joshuaContentId(id: string){
         return `people_groups/${id}.json`;
     },
-    
+    joshuaCountryId(id: string){
+        return `/countries/${id}.json`
+    }
 }

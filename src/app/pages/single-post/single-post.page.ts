@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { OptionsPopoverComponent } from 'src/app/components/options-popover/options-popover.component';
 import { ActiveSegmentEnum } from 'src/app/models/active-segment-enum';
 import { JoshuaGroupModel } from 'src/app/models/joshua-group.model';
 import { PostModel } from 'src/app/models/post.model';
@@ -24,7 +26,8 @@ export class SinglePostPage implements OnInit {
   //#endregion
   constructor(
     private wp: WpService,
-    private joshua: JoshuaService
+    private joshua: JoshuaService,
+    public popoverController: PopoverController
   ) { }
 
   ngOnInit() {
@@ -43,8 +46,15 @@ export class SinglePostPage implements OnInit {
 
 
   //#region Methods
-  openOptionsPopUp(){
-
+  async openOptionsPopUp(ev: any){
+    const popover = await this.popoverController.create({
+      component: OptionsPopoverComponent,
+      event: ev,
+      componentProps: { post: this.post },
+      translucent: false
+    });
+  
+    await popover.present();
   }
 
 

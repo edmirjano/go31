@@ -1,6 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http, HttpDownloadFileResult, HttpHeaders, HttpParams, HttpResponse } from '@capacitor-community/http';
 import { Directory, Filesystem } from '@capacitor/filesystem';
+import { StorageList } from 'src/app/models/storage-list';
+import { environment } from 'src/environments/environment.prod';
 import { StorageService } from '../storage/storage.service';
 
 @Injectable({
@@ -9,9 +11,18 @@ import { StorageService } from '../storage/storage.service';
 export class HttpService extends StorageService {
   constructor(@Inject(String) private _baseurl: string) {
     super();
+    if(this._baseurl === "wp"){
+      this.getSingleObjectString(StorageList.path).then((data)=>{
+        if(!data){
+          this._baseurl = environment.BASE_URL_WORDPRESS
+        } else {
+          this._baseurl = data;
+        }
+      });
+    }
   }
 
-  protected async get(endpoint: string, forced?: boolean, params?: HttpParams): Promise<any>{
+  protected async get(endpoint: string, forced?: boolean, params?: HttpParams,isLanguage?: boolean): Promise<any>{
     // const savedData = await this.getSingleObject(endpoint);
     // if(savedData && !forced){
     //   return savedData;
@@ -21,6 +32,10 @@ export class HttpService extends StorageService {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"
     };
+    if(isLanguage){
+      const response: HttpResponse = await Http.get({url: endpoint, headers, params});
+      return response.data;
+    }
     const response: HttpResponse = await Http.get({url: this._baseurl + endpoint, headers, params});
     // this.setSingleObject(endpoint,JSON.stringify(response.data));
     return response.data;

@@ -2,8 +2,5 @@
 	"appId": "io.ionic.starter",
 	"appName": "Go31",
 	"webDir": "www",
-	"bundledWebRuntime": false,
-	"server": {
-		"url": "http://192.168.0.214:8100"
-	}
+	"bundledWebRuntime": false
 }

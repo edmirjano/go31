@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title *ngIf="post" [innerHTML]="post.title.rendered"></ion-title>
     <ion-buttons slot="end">
-     <ion-button (click)="openOptionsPopUp()">
+     <ion-button (click)="openOptionsPopUp($event)">
       <ion-icon name="apps-outline"></ion-icon>
      </ion-button>
     </ion-buttons>
