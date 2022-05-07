@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PlayerService {
-  private audioObj: HTMLAudioElement = new Audio();
+  public audioObj: HTMLAudioElement = new Audio();
 
   constructor() { }
 

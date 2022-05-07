@@ -1,8 +1,7 @@
 <ion-grid class="ion-padding-start ion-margin-end">
   <ion-row class="ion-no-margin ion-no-padding">
     <ion-col size="4" class="ion-no-margin ion-no-padding" *ngFor="let item of data | keyvalue">
-     <!-- <app-tile [title]="item.key" [value]="item.value.toString()"></app-tile> -->
-     <app-tile [value]="item.value.toString()"></app-tile>
+     <app-tile [title]="item.key" [value]="item.value.toString()"></app-tile>
     </ion-col>
   </ion-row>
 </ion-grid>

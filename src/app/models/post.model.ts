@@ -42,7 +42,7 @@ export interface Acf {
     image_2: Image;
     image_3: Image;
     information: string;
-    map: boolean;
+    map: string; //link
     news: string;
 }
 export interface Title {

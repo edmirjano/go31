@@ -16,6 +16,9 @@ export class PostTitleComponent implements OnInit {
 
   ngOnInit() {
     this.player._init(this.audio);
+    this.player.audioObj.onended = () => {
+      this.play();
+    }
   }
 
   

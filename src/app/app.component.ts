@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   _initApp(){
-    this.storage.clearAll();
+    // this.storage.clearAll();
     this.storage.getSingleObjectString(StorageList.language).then((data)=>{
       if(data){
         this.navCtrl.navigateRoot("");

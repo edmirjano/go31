@@ -27,4 +27,11 @@ export class WpService extends HttpService {
       return data;
     })
   }
+
+
+  async getPraying(){
+    return this.get(HttpListModel.testPost).then((data: PostModel)=>{
+      return data;
+    })
+  }
 }
