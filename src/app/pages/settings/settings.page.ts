@@ -21,7 +21,7 @@ export class SettingsPage implements OnInit {
   currentLanguage: string;
   constructor(
     private wp: WpService,
-    private storage: StorageService
+    private storage: StorageService,
   ) { }
 
   ngOnInit() {

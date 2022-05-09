@@ -38,7 +38,7 @@ export interface Image {
 export interface Acf {
     id: string;
     country: string;
-    post_number: string;
+    post_number: number;
     image_2: Image;
     image_3: Image;
     information: string;

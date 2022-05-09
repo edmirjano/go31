@@ -34,4 +34,16 @@ export class WpService extends HttpService {
       return data;
     })
   }
+
+
+  async getAllPosts(){
+    return this.get(HttpListModel.allPosts).then((data)=>{
+      return data;
+    });
+  }
+  async getAllPages(){
+    return this.get(HttpListModel.allPages).then((data)=>{
+      return data;
+    });
+  }
 }

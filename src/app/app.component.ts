@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 import { StorageList } from './models/storage-list';
 import { StorageService } from './services/storage/storage.service';
+import { WpService } from './services/wp/wp.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +13,14 @@ export class AppComponent {
   constructor(
     private navCtrl: NavController,
     private menuCtrl: MenuController,
-    private storage: StorageService
+    private storage: StorageService,
+    private wp: WpService
   ) {
     this._initApp();
   }
 
-  openSettings(){
-    this.navCtrl.navigateForward('settings');
+  openPage(link: string){
+    this.navCtrl.navigateForward(link);
     this.menuCtrl.close();
   }
 
@@ -30,6 +32,13 @@ export class AppComponent {
       } else{
         this.navCtrl.navigateRoot("welcome");
       }
+    });
+  }
+
+
+  async getMenuItems(): Promise<any>{
+    this.wp.getAllPages().then((data)=>{
+    
     })
   }
 }

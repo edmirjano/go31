@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>All Posts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card *ngFor="let post of posts" (click)="openPost(post)">
+  <ion-card-header>
+    <ion-card-subtitle>{{ post.title.rendered }}</ion-card-subtitle>
+    <!-- <ion-card-title>Awesome Title</ion-card-title> -->
+    <ion-img *ngIf="post.acf.image_2?.sizes?.large" [src]="post.acf.image_2?.sizes.large"></ion-img>
+  </ion-card-header>
+  <ion-card-content>
+    {{trimInfo(post.acf?.information)}}
+  </ion-card-content>
+</ion-card>
+</ion-content>

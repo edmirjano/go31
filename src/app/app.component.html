@@ -2,7 +2,7 @@
   <ion-menu menuId="appMenu" side="start" type="push" contentId="appContent">
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Menu</ion-title>
+        <!-- <ion-title>Menu</ion-title> -->
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -11,9 +11,13 @@
        <ion-button>See All</ion-button>
      </ion-list-header> -->
       <ion-list>
-        <ion-item (click)="openSettings()" detail>
-          <ion-icon name="cog-outline"></ion-icon>
+        <ion-item (click)="openPage('settings')" detail>
+          <ion-icon slot="start" name="cog-outline"></ion-icon>
           <ion-label>Settings</ion-label>
+        </ion-item>
+        <ion-item (click)="openPage('listing')" detail>
+          <ion-icon slot="start" name="albums-outline"></ion-icon>
+          <ion-label>All Posts</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>

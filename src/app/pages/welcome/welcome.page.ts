@@ -29,8 +29,9 @@ export class WelcomePage implements OnInit {
     })
   }
 
-  setLang(lang: string, path: string){
+  setLang(lang: string, path: string, langData: Lang){
     this.storage.setSingleObject(StorageList.language, lang);
+    this.storage.setSingleObject(StorageList.languageData, JSON.stringify(langData));
     this.storage.setSingleObject(StorageList.path, path);
     this.navCtrl.navigateForward("");
   }

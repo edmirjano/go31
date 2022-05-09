@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { OptionsPopoverComponent } from 'src/app/components/options-popover/options-popover.component';
 import { ActiveSegmentEnum } from 'src/app/models/active-segment-enum';
@@ -30,24 +31,30 @@ export class SinglePostPage implements OnInit {
   constructor(
     private wp: WpService,
     private joshua: JoshuaService,
-    public popoverController: PopoverController
-  ) { }
+    public popoverController: PopoverController,
+    public route: ActivatedRoute,
+    public router: Router,
+  ) { 
+    this.route.queryParams.subscribe((params)=>{
+      if(params.fromList){
+        this.post = this.router.getCurrentNavigation().extras.state.post;
+      } else {
+        this.wp.getSinglePageTest().then((data: PostModel)=>{
+          this.post = data;
+          this.country = data.acf.country;
+          this.audioUrl = `https://joshuaproject.net/assets/media/profiles/audio/a${data.acf.id}.mp3`;
+          this.joshua.getPost(this.post.acf.id).then((data)=>{
+            this.joshuaGroup = JSON.parse(data);
+            this.generalInfoData = this.getGeneraInfoData(this.joshuaGroup);
+          })
+        })
+      }
+    })
+  }
 
   ngOnInit() {
   }
 
-  ionViewDidEnter() {
-
-    this.wp.getSinglePageTest().then((data: PostModel)=>{
-      this.post = data;
-      this.country = data.acf.country;
-      this.audioUrl = `https://joshuaproject.net/assets/media/profiles/audio/a${data.acf.id}.mp3`;
-      this.joshua.getPost(this.post.acf.id).then((data)=>{
-        this.joshuaGroup = JSON.parse(data);
-        this.generalInfoData = this.getGeneraInfoData(this.joshuaGroup);
-      })
-    })
-  }
 
 
   //#region Methods

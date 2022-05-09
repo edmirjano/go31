@@ -19,6 +19,14 @@ const routes: Routes = [
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
   },
+  {
+    path: 'listing',
+    loadChildren: () => import('./pages/listing/listing.module').then( m => m.ListingPageModule)
+  },
+  {
+    path: 'webview',
+    loadChildren: () => import('./pages/webview/webview.module').then( m => m.WebviewPageModule)
+  },
 ];
 
 @NgModule({
