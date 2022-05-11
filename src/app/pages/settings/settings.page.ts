@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonDatetime, IonPopover } from '@ionic/angular';
 import { Lang, LanguageModel } from 'src/app/models/language.model';
-import { StorageList } from 'src/app/models/storage-list';
+import { StorageListModel } from 'src/app/models/storage-list';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { WpService } from 'src/app/services/wp/wp.service';
@@ -40,7 +40,7 @@ export class SettingsPage implements OnInit {
         this.langArray.push(value);
       });
     });
-    this.currentLanguage = await this.storage.getSingleObjectString(StorageList.language);
+    this.currentLanguage = await this.storage.getSingleObjectString(StorageListModel.language);
     this.langData = await this.language.getLanguageData();
   }
 

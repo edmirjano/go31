@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
 import { Lang } from './models/language.model';
 import { PageModel } from './models/page.model';
-import { StorageList } from './models/storage-list';
+import { StorageListModel } from './models/storage-list';
 import { LanguageService } from './services/language/language.service';
 import { StorageService } from './services/storage/storage.service';
 import { WpService } from './services/wp/wp.service';
@@ -33,7 +33,7 @@ export class AppComponent {
 
   async _initApp(){
     // this.storage.clearAll();
-    this.storage.getSingleObjectString(StorageList.language).then((data)=>{
+    this.storage.getSingleObjectString(StorageListModel.language).then((data)=>{
       if(data){
         this.navCtrl.navigateRoot("");
       } else{

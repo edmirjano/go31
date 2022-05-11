@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Lang, LanguageModel } from 'src/app/models/language.model';
-import { StorageList } from 'src/app/models/storage-list';
+import { StorageListModel } from 'src/app/models/storage-list';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { WpService } from 'src/app/services/wp/wp.service';
 
@@ -30,9 +30,9 @@ export class WelcomePage implements OnInit {
   }
 
   setLang(lang: string, path: string, langData: Lang){
-    this.storage.setSingleObject(StorageList.language, lang);
-    this.storage.setSingleObject(StorageList.languageData, JSON.stringify(langData));
-    this.storage.setSingleObject(StorageList.path, path);
+    this.storage.setSingleObject(StorageListModel.language, lang);
+    this.storage.setSingleObject(StorageListModel.languageData, JSON.stringify(langData));
+    this.storage.setSingleObject(StorageListModel.path, path);
     this.navCtrl.navigateForward("");
   }
 }

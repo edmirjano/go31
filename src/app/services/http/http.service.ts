@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http, HttpDownloadFileResult, HttpHeaders, HttpParams, HttpResponse } from '@capacitor-community/http';
 import { Directory, Filesystem } from '@capacitor/filesystem';
-import { StorageList } from 'src/app/models/storage-list';
+import { StorageListModel } from 'src/app/models/storage-list';
 import { environment } from 'src/environments/environment.prod';
 import { StorageService } from '../storage/storage.service';
 
@@ -12,7 +12,7 @@ export class HttpService extends StorageService {
   constructor(@Inject(String) private _baseurl: string) {
     super();
     if(this._baseurl === "wp"){
-      this.getSingleObjectString(StorageList.path).then((data)=>{
+      this.getSingleObjectString(StorageListModel.path).then((data)=>{
         if(!data){
           this._baseurl = environment.BASE_URL_WORDPRESS
         } else {

@@ -4,7 +4,7 @@ import { LanguageModel } from 'src/app/models/language.model';
 import { PageModel } from 'src/app/models/page.model';
 import { PostModel } from 'src/app/models/post.model';
 import { PrayingModel } from 'src/app/models/praying.model';
-import { StorageList } from 'src/app/models/storage-list';
+import { StorageListModel } from 'src/app/models/storage-list';
 import { environment } from 'src/environments/environment.prod';
 import { HttpService } from '../http/http.service';
 import { StorageService } from '../storage/storage.service';

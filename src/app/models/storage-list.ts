@@ -1,5 +1,6 @@
-export const StorageList = {
+export const StorageListModel = {
     language: "Go31Language",
     languageData: "Go31LanguageData",
-    path: "Go31BasePath"
+    path: "Go31BasePath",
+    notificationOptions: "Go31NotificationOptions"
 }
