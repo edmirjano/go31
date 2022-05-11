@@ -17,6 +17,7 @@
     <app-post-title [title]="post.title.rendered" [audio]="audioUrl"></app-post-title>
     <app-general-info [data]="generalInfoData"></app-general-info>
     <app-paragraph  [content]="post.acf.information" ></app-paragraph>
+    <ion-img [src]="post.acf.map ? post.acf.map : joshuaMap"></ion-img>
   </div>
 </ion-content>
 <ion-footer>

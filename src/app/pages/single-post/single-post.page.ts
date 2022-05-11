@@ -30,6 +30,7 @@ export class SinglePostPage implements OnInit {
   private readonly prayingLink: string = "https://demo.gremza.com/pray/post.php?key=1";
   praying:  PrayingModel;
   langData: Lang;
+  joshuaMap: string;
   //#endregion
   constructor(
     private wp: WpService,
@@ -88,6 +89,7 @@ export class SinglePostPage implements OnInit {
           [this.langData.PercentChristianPGAC]: group.PercentChristianPGAC,
           [this.langData.PercentEvangelicalPGAC]: group.PercentEvangelicalPGAC
         }
+        this.joshuaMap = group.EthnolinguisticMap;
       }
     });
     return toReturn;
