@@ -19,6 +19,10 @@
           <ion-icon slot="start" name="albums-outline"></ion-icon>
           <ion-label>{{langData ? langData.all_posts: "All Posts"}}</ion-label>
         </ion-item>
+        <ion-item *ngFor="let item of menuItems" (click)="openWebview(item)" detail>
+          <!-- <ion-icon slot="start" name="albums-outline"></ion-icon> -->
+          <ion-label>{{ item.title.rendered }}</ion-label>
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
