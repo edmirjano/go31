@@ -24,11 +24,11 @@
     <ion-buttons slot="start">
       <ion-button fill="solid" (click)="onPrayClick()">
         <ion-icon slot="start" name="book-outline"></ion-icon>
-        Pray
+        {{langData ? langData.pray : "Pray"}}
       </ion-button>
     </ion-buttons>
     <ion-text color="primary">
-      24 Praying today
+      24 {{langData ? langData.prayingtoday : "praying today"}}
     </ion-text>
   </ion-toolbar>
 </ion-footer>

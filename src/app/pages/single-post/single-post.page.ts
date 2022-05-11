@@ -4,9 +4,11 @@ import { PopoverController } from '@ionic/angular';
 import { OptionsPopoverComponent } from 'src/app/components/options-popover/options-popover.component';
 import { ActiveSegmentEnum } from 'src/app/models/active-segment-enum';
 import { JoshuaGroupModel } from 'src/app/models/joshua-group.model';
+import { Lang } from 'src/app/models/language.model';
 import { PostModel } from 'src/app/models/post.model';
 import { PrayingModel } from 'src/app/models/praying.model';
 import { JoshuaService } from 'src/app/services/joshua/joshua.service';
+import { LanguageService } from 'src/app/services/language/language.service';
 import { PlayerService } from 'src/app/services/player/player.service';
 import { WpService } from 'src/app/services/wp/wp.service';
 
@@ -26,7 +28,8 @@ export class SinglePostPage implements OnInit {
   generalInfoData: Record<string,string>;
   country: string;
   private readonly prayingLink: string = "https://demo.gremza.com/pray/post.php?key=1";
-  praying:  PrayingModel
+  praying:  PrayingModel;
+  langData: Lang;
   //#endregion
   constructor(
     private wp: WpService,
@@ -34,6 +37,7 @@ export class SinglePostPage implements OnInit {
     public popoverController: PopoverController,
     public route: ActivatedRoute,
     public router: Router,
+    private language: LanguageService
   ) { 
     this.route.queryParams.subscribe((params)=>{
       if(params.fromList){
@@ -52,7 +56,8 @@ export class SinglePostPage implements OnInit {
     })
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.langData = await this.language.getLanguageData();
   }
 
 
@@ -76,12 +81,12 @@ export class SinglePostPage implements OnInit {
     data.forEach((group)=>{
       if(group.ROG3 == this.country){
         toReturn = {
-          'PeopNameInCountry': group.PeopNameInCountry,
-          'Population': group.Population.toString(),
-          'PrimaryReligion': group.PrimaryReligion,
-          'PrimaryLanguageName': group.PrimaryLanguageName,
-          'PercentChristianPGAC': group.PercentChristianPGAC,
-          'PercentEvangelicalPGAC': group.PercentEvangelicalPGAC
+          [this.langData.PeopNameInCountry]: group.PeopNameInCountry,
+          [this.langData.Population]: group.Population.toString(),
+          [this.langData.PrimaryReligion]: group.PrimaryReligion,
+          [this.langData.PrimaryLanguageName]: group.PrimaryLanguageName,
+          [this.langData.PercentChristianPGAC]: group.PercentChristianPGAC,
+          [this.langData.PercentEvangelicalPGAC]: group.PercentEvangelicalPGAC
         }
       }
     });

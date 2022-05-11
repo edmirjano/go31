@@ -9,15 +9,15 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Notifications</ion-card-title>
+      <ion-card-title>{{langData.notifications}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label>Allow Notifications</ion-label>
+        <ion-label>{{langData.allow_noticications}}</ion-label>
         <ion-toggle [(ngModel)]="allowNotifications"></ion-toggle>
       </ion-item>
       <ion-item>
-        <ion-label position="fixed">Time zone</ion-label>
+        <ion-label position="fixed">{{langData.time_zone}}</ion-label>
         <ion-input type="text" [(ngModel)]="userTimeZone" class="ion-text-right" [disabled]="!allowNotifications" readonly></ion-input>
       </ion-item>
       <ion-item>
@@ -39,11 +39,11 @@
   </ion-card>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Language</ion-card-title>
+      <ion-card-title>{{langData.language}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label>Select Language</ion-label>
+        <ion-label>{{langData.select_language}}</ion-label>
         <ion-select (ionChange)="onLanguageChange($event)" [value]="currentLanguage" *ngIf="languages">
           <ion-select-option *ngFor="let lang of languages.acf.language_list | keyvalue" [value]="lang.key">{{lang.key}}
           </ion-select-option>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+import { Lang } from './models/language.model';
 import { StorageList } from './models/storage-list';
+import { LanguageService } from './services/language/language.service';
 import { StorageService } from './services/storage/storage.service';
 import { WpService } from './services/wp/wp.service';
 
@@ -10,11 +12,13 @@ import { WpService } from './services/wp/wp.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  langData: Lang;
   constructor(
     private navCtrl: NavController,
     private menuCtrl: MenuController,
     private storage: StorageService,
-    private wp: WpService
+    private wp: WpService,
+    private language: LanguageService
   ) {
     this._initApp();
   }
@@ -24,8 +28,8 @@ export class AppComponent {
     this.menuCtrl.close();
   }
 
-  _initApp(){
-    // this.storage.clearAll();
+  async _initApp(){
+    this.storage.clearAll();
     this.storage.getSingleObjectString(StorageList.language).then((data)=>{
       if(data){
         this.navCtrl.navigateRoot("");
@@ -33,6 +37,7 @@ export class AppComponent {
         this.navCtrl.navigateRoot("welcome");
       }
     });
+    this.langData = await this.language.getLanguageData();
   }
 
 

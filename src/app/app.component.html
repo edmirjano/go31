@@ -17,7 +17,7 @@
         </ion-item>
         <ion-item (click)="openPage('listing')" detail>
           <ion-icon slot="start" name="albums-outline"></ion-icon>
-          <ion-label>All Posts</ion-label>
+          <ion-label>{{langData ? langData.all_posts: "All Posts"}}</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
