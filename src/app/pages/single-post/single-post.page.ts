@@ -31,6 +31,8 @@ export class SinglePostPage implements OnInit {
   praying:  PrayingModel;
   langData: Lang;
   joshuaMap: string;
+  prayingTodayNumber: number;
+  disablePrayButton: boolean;
   //#endregion
   constructor(
     private wp: WpService,
@@ -40,30 +42,35 @@ export class SinglePostPage implements OnInit {
     public router: Router,
     private language: LanguageService
   ) { 
+    this.post = this.joshuaGroup = undefined;
     this.route.queryParams.subscribe((params)=>{
       if(params.fromList){
         this.post = this.router.getCurrentNavigation().extras.state.post;
+        this.loadJoshua(this.post);
       } else {
         this.wp.getTodayPost().then((data: PostModel)=>{
           this.post = data;
-          this.country = data.acf.country;
-          this.audioUrl = `https://joshuaproject.net/assets/media/profiles/audio/a${data.acf.id}.mp3`;
-          this.joshua.getPost(this.post.acf.id).then((data)=>{
-            this.joshuaGroup = JSON.parse(data);
-            this.generalInfoData = this.getGeneraInfoData(this.joshuaGroup);
-          })
-        })
+          this.loadJoshua(this.post);
+        });
       }
-    })
+    });
   }
 
   async ngOnInit() {
     this.langData = await this.language.getLanguageData();
   }
 
-
-
   //#region Methods
+  async loadJoshua(post: PostModel){
+    this.prayingTodayNumber = await this.getPostPraying(post.acf.id);
+    this.country = post.acf.country;
+    this.audioUrl = `https://joshuaproject.net/assets/media/profiles/audio/a${post.acf.id}.mp3`;
+    this.joshua.getPost(post.acf.id).then((data)=>{
+      this.joshuaGroup = JSON.parse(data);
+      this.generalInfoData = this.getGeneraInfoData(this.joshuaGroup);
+    });
+  }
+
   async openOptionsPopUp(ev: any){
     const popover = await this.popoverController.create({
       component: OptionsPopoverComponent,
@@ -74,8 +81,6 @@ export class SinglePostPage implements OnInit {
   
     await popover.present();
   }
-
-
 
   getGeneraInfoData(data: Array<JoshuaGroupModel>){
     let toReturn;
@@ -88,16 +93,27 @@ export class SinglePostPage implements OnInit {
           [this.langData.PrimaryLanguageName]: group.PrimaryLanguageName,
           [this.langData.PercentChristianPGAC]: group.PercentChristianPGAC,
           [this.langData.PercentEvangelicalPGAC]: group.PercentEvangelicalPGAC
-        }
+        };
         this.joshuaMap = group.EthnolinguisticMap;
       }
     });
     return toReturn;
   }
-  //#endregion
-
-  onPrayClick(){
-    
+  async getPostPraying(id: string): Promise<number>{
+    return this.wp.getPraying().then((data: PrayingModel[])=>{
+      return data.filter((pray)=>{
+        return pray.PeopleID == id;
+      }).length;
+    });
   }
 
+  onPrayClick(){
+    this.wp.addPraying(this.post.acf.id).then(async (data)=>{
+      this.disablePrayButton = true;
+      setTimeout(async () => {
+        this.prayingTodayNumber = await this.getPostPraying(this.post.acf.id);
+      }, 1000);
+    });
+  }
+  //#endregion
 }

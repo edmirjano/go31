@@ -22,7 +22,7 @@ export class HttpService extends StorageService {
     }
   }
 
-  protected async get(endpoint: string, forced?: boolean, params?: HttpParams,isLanguage?: boolean): Promise<any>{
+  protected async get(endpoint: string, forced?: boolean, params?: HttpParams,useFullURL?: boolean): Promise<any>{
     // const savedData = await this.getSingleObject(endpoint);
     // if(savedData && !forced){
     //   return savedData;
@@ -32,7 +32,7 @@ export class HttpService extends StorageService {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"
     };
-    if(isLanguage){
+    if(useFullURL){
       const response: HttpResponse = await Http.get({url: endpoint, headers, params});
       return response.data;
     }

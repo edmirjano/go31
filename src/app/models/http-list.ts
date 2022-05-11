@@ -9,5 +9,8 @@ export const HttpListModel = {
     },
     joshuaCountryId(id: string){
         return `/countries/${id}.json`
+    },
+    submitPray(id: string) {
+        return `http://demo.gremza.com/pray/post.php?key=1&pid=${id}&submit=submit`
     }
 }

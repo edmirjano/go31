@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpListModel } from 'src/app/models/http-list';
+import { LanguageModel } from 'src/app/models/language.model';
 import { PageModel } from 'src/app/models/page.model';
 import { PostModel } from 'src/app/models/post.model';
+import { PrayingModel } from 'src/app/models/praying.model';
 import { StorageList } from 'src/app/models/storage-list';
 import { environment } from 'src/environments/environment.prod';
 import { HttpService } from '../http/http.service';
@@ -16,8 +18,8 @@ export class WpService extends HttpService {
     super("wp");
   }
 
-  async getLanguages(){
-    return this.get(environment.BASE_URL_WORDPRESS + HttpListModel.languages, false,null,true).then((data)=>{
+  async getLanguages(): Promise<LanguageModel>{
+    return this.get(environment.BASE_URL_WORDPRESS + HttpListModel.languages,false,null,true).then((data)=>{
       return data;
     });
   }
@@ -30,12 +32,17 @@ export class WpService extends HttpService {
   }
 
 
-  async getPraying(){
-    return this.get(HttpListModel.testPost).then((data: PostModel)=>{
+  async getPraying(): Promise<PrayingModel[]>{
+    return this.get(environment.PRAYING_URL,false,null,true).then((data: PrayingModel[])=>{
       return data;
     })
   }
 
+  async addPraying(id: string): Promise<PrayingModel[]>{
+    return this.get(HttpListModel.submitPray(id),false,null,true).then((data)=>{
+      return data;
+    })
+  }
 
   async getAllPosts(): Promise<PostModel[]>{
     return this.get(HttpListModel.allPosts).then((data)=>{

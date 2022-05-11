@@ -5,31 +5,34 @@
     </ion-buttons>
     <ion-title *ngIf="post" [innerHTML]="post.title.rendered"></ion-title>
     <ion-buttons slot="end">
-     <ion-button (click)="openOptionsPopUp($event)">
-      <ion-icon name="apps-outline"></ion-icon>
-     </ion-button>
+      <ion-button (click)="openOptionsPopUp($event)">
+        <ion-icon name="apps-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
+  <ion-progress-bar type="indeterminate" *ngIf="!post || !generalInfoData"></ion-progress-bar>
 </ion-header>
 <ion-content>
   <div *ngIf="post">
-    <app-slider [images]="[post.acf.image_2? post.acf.image_2?.sizes.large : '',post.acf.image_3 ? post.acf.image_3?.sizes.large: '']"></app-slider>
+    <app-slider
+      [images]="[post.acf.image_2? post.acf.image_2?.sizes.large : '',post.acf.image_3 ? post.acf.image_3?.sizes.large: '']">
+    </app-slider>
     <app-post-title [title]="post.title.rendered" [audio]="audioUrl"></app-post-title>
     <app-general-info [data]="generalInfoData"></app-general-info>
-    <app-paragraph  [content]="post.acf.information" ></app-paragraph>
+    <app-paragraph [content]="post.acf.information"></app-paragraph>
     <ion-img [src]="post.acf.map ? post.acf.map : joshuaMap"></ion-img>
   </div>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button fill="solid" (click)="onPrayClick()">
+      <ion-button fill="solid" (click)="onPrayClick()" [disabled]="disablePrayButton">
         <ion-icon slot="start" name="book-outline"></ion-icon>
         {{langData ? langData.pray : "Pray"}}&nbsp;
       </ion-button>
     </ion-buttons>
     <ion-text color="primary" class="ion-padding-start">
-      24 {{langData ? langData.prayingtoday : "praying today"}}
+      {{prayingTodayNumber}} {{langData ? langData.prayingtoday : "praying today"}}
     </ion-text>
   </ion-toolbar>
 </ion-footer>

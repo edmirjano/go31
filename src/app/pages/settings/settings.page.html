@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button text=""></ion-back-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Settings</ion-title>
   </ion-toolbar>
@@ -43,7 +43,7 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label>{{langData.select_language}}</ion-label>
+        <ion-label>{{langData ? langData.select_language: ""}}</ion-label>
         <ion-select (ionChange)="onLanguageChange($event)" [value]="currentLanguage" *ngIf="languages">
           <ion-select-option *ngFor="let lang of languages.acf.language_list | keyvalue" [value]="lang.key">{{lang.key}}
           </ion-select-option>
