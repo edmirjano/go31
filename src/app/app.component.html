@@ -11,6 +11,10 @@
        <ion-button>See All</ion-button>
      </ion-list-header> -->
       <ion-list>
+        <ion-item (click)="openPage('')" detail>
+          <ion-icon slot="start" name="home-outline"></ion-icon>
+          <ion-label>Today</ion-label>
+        </ion-item>
         <ion-item (click)="openPage('settings')" detail>
           <ion-icon slot="start" name="cog-outline"></ion-icon>
           <ion-label>Settings</ion-label>

@@ -44,7 +44,7 @@ export class SinglePostPage implements OnInit {
       if(params.fromList){
         this.post = this.router.getCurrentNavigation().extras.state.post;
       } else {
-        this.wp.getSinglePageTest().then((data: PostModel)=>{
+        this.wp.getTodayPost().then((data: PostModel)=>{
           this.post = data;
           this.country = data.acf.country;
           this.audioUrl = `https://joshuaproject.net/assets/media/profiles/audio/a${data.acf.id}.mp3`;

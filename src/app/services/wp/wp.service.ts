@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpListModel } from 'src/app/models/http-list';
+import { PageModel } from 'src/app/models/page.model';
 import { PostModel } from 'src/app/models/post.model';
 import { StorageList } from 'src/app/models/storage-list';
 import { environment } from 'src/environments/environment.prod';
@@ -22,7 +23,7 @@ export class WpService extends HttpService {
   }
 
 
-  async getSinglePageTest(){
+  async getSinglePageTest(): Promise<PostModel>{
     return this.get(HttpListModel.testPost).then((data: PostModel)=>{
       return data;
     })
@@ -36,14 +37,26 @@ export class WpService extends HttpService {
   }
 
 
-  async getAllPosts(){
+  async getAllPosts(): Promise<PostModel[]>{
     return this.get(HttpListModel.allPosts).then((data)=>{
       return data;
     });
   }
-  async getAllPages(){
+  async getAllPages(): Promise<PageModel[]>{
     return this.get(HttpListModel.allPages).then((data)=>{
       return data;
+    });
+  }
+
+
+  async getTodayPost(): Promise<PostModel>{
+    const today = new Date().getDate();
+    return this.getAllPosts().then((_allPosts) => {
+      return _allPosts.filter((post)=>{
+        if(post.acf.post_number == today){
+          return post;
+        }
+      })[0];
     });
   }
 }
