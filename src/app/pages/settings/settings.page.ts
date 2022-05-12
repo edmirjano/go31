@@ -72,4 +72,14 @@ export class SettingsPage implements OnInit {
     await this.language._init(lang.lang_name, lang.path, lang);
     this.currentLanguage = await this.storage.getSingleObjectString(StorageListModel.language);
   }
+
+
+  allowNotificationChange(event){
+    this.allowNotifications = event;
+    if(this.allowNotifications){
+      this.storage.setSingleObject(StorageListModel.notificationPermission, "1");
+    } else {
+      this.storage.removeSingleObject(StorageListModel.notificationPermission);
+    }
+  }
 }

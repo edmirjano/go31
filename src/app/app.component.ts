@@ -7,6 +7,7 @@ import { LanguageService } from './services/language/language.service';
 import { StorageService } from './services/storage/storage.service';
 import { WpService } from './services/wp/wp.service';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { NotificationService } from './services/notification/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent {
     private menuCtrl: MenuController,
     private storage: StorageService,
     private wp: WpService,
-    private language: LanguageService
+    private language: LanguageService,
+    private notification: NotificationService
   ) {
     this._initApp();
   }
@@ -33,7 +35,7 @@ export class AppComponent {
   }
 
   async _initApp(){
-    this.storage.clearAll();
+    // this.storage.clearAll();
     await SplashScreen.show({
       showDuration: 2000,
       autoHide: true
@@ -47,6 +49,7 @@ export class AppComponent {
     });
     this.langData = await this.language.getLanguageData();
     await this.getMenuItems();
+    this.notification._init();
     // await SplashScreen.hide();
   }
   

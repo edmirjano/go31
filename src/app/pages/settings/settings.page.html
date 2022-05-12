@@ -14,7 +14,7 @@
     <ion-card-content>
       <ion-item>
         <ion-label>{{langData.allow_noticications}}</ion-label>
-        <ion-toggle [(ngModel)]="allowNotifications"></ion-toggle>
+        <ion-toggle (ngModelChange)="allowNotificationChange($event)" [(ngModel)]="allowNotifications"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-label position="fixed">{{langData.time_zone}}</ion-label>
