@@ -112,7 +112,7 @@ export class SinglePostPage implements OnInit {
       this.disablePrayButton = true;
       setTimeout(async () => {
         this.prayingTodayNumber = await this.getPostPraying(this.post.acf.id);
-      }, 1000);
+      }, 3000);
     });
   }
   //#endregion

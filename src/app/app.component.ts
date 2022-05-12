@@ -8,6 +8,7 @@ import { StorageService } from './services/storage/storage.service';
 import { WpService } from './services/wp/wp.service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { NotificationService } from './services/notification/notification.service';
+import { Device } from '@capacitor/device';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +37,7 @@ export class AppComponent {
 
   async _initApp(){
     // this.storage.clearAll();
+    const info = await Device.getInfo();
     await SplashScreen.show({
       showDuration: 2000,
       autoHide: true

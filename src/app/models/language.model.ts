@@ -1,5 +1,6 @@
 export interface Acf {
     language_list: LanguageList;
+    version_check: string;
 }
 export interface LanguageList {
     en: Lang;
