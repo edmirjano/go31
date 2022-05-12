@@ -110,9 +110,7 @@ export class SinglePostPage implements OnInit {
   onPrayClick(){
     this.wp.addPraying(this.post.acf.id).then(async (data)=>{
       this.disablePrayButton = true;
-      setTimeout(async () => {
-        this.prayingTodayNumber = await this.getPostPraying(this.post.acf.id);
-      }, 3000);
+      this.prayingTodayNumber++;
     });
   }
   //#endregion

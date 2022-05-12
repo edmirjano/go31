@@ -8,7 +8,8 @@ import { StorageService } from './services/storage/storage.service';
 import { WpService } from './services/wp/wp.service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { NotificationService } from './services/notification/notification.service';
-import { Device } from '@capacitor/device';
+import { App } from '@capacitor/app';
+import { ActionSheet } from '@capacitor/action-sheet';
 
 @Component({
   selector: 'app-root',
@@ -37,10 +38,15 @@ export class AppComponent {
 
   async _initApp(){
     // this.storage.clearAll();
-    const info = await Device.getInfo();
+    const info = await App.getInfo();
+    this.wp.getLanguages().then((data)=>{
+      if(Number(info.version) < Number(data.acf.version_check)){
+        this.showUpdateDialog();
+      }
+    });
     await SplashScreen.show({
       showDuration: 2000,
-      autoHide: true
+      autoHide: true 
     });    
     this.storage.getSingleObjectString(StorageListModel.language).then((data)=>{
       if(data){
@@ -69,5 +75,15 @@ export class AppComponent {
     })
   }
 
+  async showUpdateDialog(){
+    const result = await ActionSheet.showActions({
+      title: "Update Avaliable",
+      message: "There is a new update available.",
+      options: [{
+        title: "Go to store",
+      }],
+    });
+    return result;
+  }
 
 }
