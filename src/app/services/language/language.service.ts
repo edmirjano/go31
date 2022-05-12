@@ -13,9 +13,10 @@ export class LanguageService {
     private storage: StorageService
   ) { }
 
-  async _init(lang: string, path: string): Promise<void> {
-    await this.storage.setSingleObject(StorageListModel.language, lang);
-    await this.storage.setSingleObject(StorageListModel.path, path);
+  async _init(lang: string, path: string, langData: Lang): Promise<void> {
+    this.storage.setSingleObject(StorageListModel.language, lang);
+    this.storage.setSingleObject(StorageListModel.languageData, JSON.stringify(langData));
+    this.storage.setSingleObject(StorageListModel.path, path);
   }
 
 

@@ -45,7 +45,7 @@
       <ion-item>
         <ion-label>{{langData ? langData.select_language: ""}}</ion-label>
         <ion-select (ionChange)="onLanguageChange($event)" [value]="currentLanguage" *ngIf="languages">
-          <ion-select-option *ngFor="let lang of languages.acf.language_list | keyvalue" [value]="lang.key">{{lang.key}}
+          <ion-select-option *ngFor="let lang of langArray" [value]="lang.lang_name">{{lang.lang_name}}
           </ion-select-option>
         </ion-select>
       </ion-item>

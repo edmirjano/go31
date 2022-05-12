@@ -15,7 +15,14 @@ export class NotificationService {
     private storage: StorageService
   ) { }
 
-
+  
+  async _init(){
+    LocalNotifications.requestPermissions().then((data)=>{
+      if(data.display != 'denied'){
+        this.storage.setSingleObject(StorageListModel.notificationPermission, "1");
+      }
+    })
+  }
 
   async schedule(){
     

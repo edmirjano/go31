@@ -33,7 +33,7 @@ export class AppComponent {
   }
 
   async _initApp(){
-    // this.storage.clearAll();
+    this.storage.clearAll();
     await SplashScreen.show({
       showDuration: 2000,
       autoHide: true

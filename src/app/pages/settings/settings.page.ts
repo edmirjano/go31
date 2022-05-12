@@ -16,7 +16,7 @@ export class SettingsPage implements OnInit {
   // @ViewChild(IonDatetime, { static: true }) time: IonDatetime;
   selectedDate: string = new Date().toISOString();
   userTimeZone: any;
-  allowNotifications: boolean = true;
+  allowNotifications: boolean;
   languages: LanguageModel;
   langArray: Lang[] = [];
   currentLanguage: string;
@@ -42,6 +42,11 @@ export class SettingsPage implements OnInit {
     });
     this.currentLanguage = await this.storage.getSingleObjectString(StorageListModel.language);
     this.langData = await this.language.getLanguageData();
+    this.storage.getSingleObjectString(StorageListModel.notificationPermission).then((data)=>{
+      if(data === "1"){
+        this.allowNotifications = true;
+      }
+    });
   }
 
   confirm() {
@@ -58,7 +63,13 @@ export class SettingsPage implements OnInit {
     this.selectedDate = value;
   }
 
-  onLanguageChange(event){
+  async onLanguageChange(event){
     const lang = event.target.value;
+    alert(JSON.stringify(lang));
+    const newLang = this.langArray.filter((data)=>{
+      return data.lang_name = lang;
+    })[0];
+    await this.language._init(lang.lang_name, lang.path, lang);
+    this.currentLanguage = await this.storage.getSingleObjectString(StorageListModel.language);
   }
 }

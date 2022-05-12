@@ -23,10 +23,10 @@ export class HttpService extends StorageService {
   }
 
   protected async get(endpoint: string, forced?: boolean, params?: HttpParams,useFullURL?: boolean): Promise<any>{
-    // const savedData = await this.getSingleObject(endpoint);
-    // if(savedData && !forced){
-    //   return savedData;
-    // }
+    const savedData = await this.getSingleObject(endpoint);
+    if(savedData && !forced){
+      return savedData;
+    }
     const headers: HttpHeaders = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
@@ -37,7 +37,7 @@ export class HttpService extends StorageService {
       return response.data;
     }
     const response: HttpResponse = await Http.get({url: this._baseurl + endpoint, headers, params});
-    // this.setSingleObject(endpoint,JSON.stringify(response.data));
+    this.setSingleObject(endpoint,JSON.stringify(response.data));
     return response.data;
   }
 
