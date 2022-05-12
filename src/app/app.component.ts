@@ -6,6 +6,7 @@ import { StorageListModel } from './models/storage-list';
 import { LanguageService } from './services/language/language.service';
 import { StorageService } from './services/storage/storage.service';
 import { WpService } from './services/wp/wp.service';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,10 @@ export class AppComponent {
 
   async _initApp(){
     // this.storage.clearAll();
+    await SplashScreen.show({
+      showDuration: 2000,
+      autoHide: true
+    });    
     this.storage.getSingleObjectString(StorageListModel.language).then((data)=>{
       if(data){
         this.navCtrl.navigateRoot("");
@@ -42,6 +47,7 @@ export class AppComponent {
     });
     this.langData = await this.language.getLanguageData();
     await this.getMenuItems();
+    // await SplashScreen.hide();
   }
   
   openWebview(page: PageModel){
