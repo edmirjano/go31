@@ -1,15 +1,19 @@
 .background{
-    background-image: url("../../../assets/firsback.png");
+    background-image: url("../../../assets/splash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
     width: 100%;
+    .filter{
+        height: 100%;
+        width: 100%;
+        backdrop-filter: blur(10px);
+    }
 }
 
 .flags{
     bottom: 9%;
     position: absolute;
-
     img{
         height: 65% !important; 
         width: auto;

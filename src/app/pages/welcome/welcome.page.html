@@ -1,8 +1,10 @@
 <ion-content>
   <div class="background">
+    <div class="filter">
       <div class="flags ion-padding" style="display: inline-flex; justify-content: center;">
           <img *ngFor="let lang of langArray" src="assets/al.png" style="width: 45%; padding: 8%;" (click)="setLang(lang.lang_name,'https://blessfrontierpeoples.org/wp-json/wp/v2/', lang)" />
           <!-- <img *ngFor="let lang of langArray" src="assets/al.png" style="width: 45%; padding: 8%;" (click)="setLang('al', 'https://blessfrontierpeoples.org/wp-json/wp/v2/', lang)" /> -->
        </div>
+    </div>
   </div>
 </ion-content>
