@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, NavController, Platform } from '@ionic/angular';
 import { Lang } from './models/language.model';
 import { PageModel } from './models/page.model';
 import { StorageListModel } from './models/storage-list';
@@ -26,7 +26,8 @@ export class AppComponent {
     private storage: StorageService,
     private wp: WpService,
     private language: LanguageService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private platform: Platform
   ) {
     this._initApp();
   }
@@ -39,9 +40,16 @@ export class AppComponent {
   async _initApp(){
     // this.storage.clearAll();
     const info = await App.getInfo();
-    this.wp.getLanguages().then((data)=>{
+    this.wp.getLanguages().then(async (data)=>{
       if(Number(info.version) < Number(data.acf.version_check)){
-        this.showUpdateDialog();
+        const res = await this.showUpdateDialog();
+        if(res){
+          if (this.platform.is('android')) {
+            window.open('https://play.google.com/store/apps/details?id=com.gemrza.bfp', '_system');
+          } else if (this.platform.is('ios')) {
+            window.open('https://apps.apple.com/us/app/bless-frontier-peoples/id1624027417', '_system');
+          }
+        }
       }
     });
     await SplashScreen.show({
@@ -81,7 +89,7 @@ export class AppComponent {
       message: "There is a new update available.",
       options: [{
         title: "Go to store",
-      }],
+      }], 
     });
     return result;
   }

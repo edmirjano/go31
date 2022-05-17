@@ -33,6 +33,7 @@ export class SinglePostPage implements OnInit {
   joshuaMap: string;
   prayingTodayNumber: number;
   disablePrayButton: boolean;
+  joshuaCountry: JoshuaGroupModel;
   //#endregion
   constructor(
     private wp: WpService,
@@ -86,6 +87,7 @@ export class SinglePostPage implements OnInit {
     let toReturn;
     data.forEach((group)=>{
       if(group.ROG3 == this.country){
+        this.joshuaCountry = group;
         toReturn = {
           [this.langData.PeopNameInCountry]: group.PeopNameInCountry,
           [this.langData.Population]: group.Population.toString(),
