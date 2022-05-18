@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'Go31',
+  appId: 'com.gemrza.bfp',
+  appName: 'Bless Frontier Peoples',
   webDir: 'www',
   bundledWebRuntime: false
 };

@@ -1,7 +1,7 @@
 <ion-card>
   <ion-slides>
     <ion-slide *ngFor="let img of images">
-      <img [src]="img" />
+      <img *ngIf="img" [src]="img" />
     </ion-slide>
   </ion-slides>
 </ion-card>

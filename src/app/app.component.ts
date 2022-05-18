@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController, NavController } from '@ionic/angular';
+import { MenuController, NavController, Platform } from '@ionic/angular';
 import { Lang } from './models/language.model';
 import { PageModel } from './models/page.model';
 import { StorageListModel } from './models/storage-list';
@@ -8,7 +8,8 @@ import { StorageService } from './services/storage/storage.service';
 import { WpService } from './services/wp/wp.service';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { NotificationService } from './services/notification/notification.service';
-import { Device } from '@capacitor/device';
+import { App } from '@capacitor/app';
+import { ActionSheet } from '@capacitor/action-sheet';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,8 @@ export class AppComponent {
     private storage: StorageService,
     private wp: WpService,
     private language: LanguageService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private platform: Platform
   ) {
     this._initApp();
   }
@@ -37,10 +39,22 @@ export class AppComponent {
 
   async _initApp(){
     // this.storage.clearAll();
-    const info = await Device.getInfo();
+    const info = await App.getInfo();
+    this.wp.getLanguages().then(async (data)=>{
+      if(Number(info.version) < Number(data.acf.version_check)){
+        const res = await this.showUpdateDialog();
+        if(res){
+          if (this.platform.is('android')) {
+            window.open('https://play.google.com/store/apps/details?id=com.gemrza.bfp', '_system');
+          } else if (this.platform.is('ios')) {
+            window.open('https://apps.apple.com/us/app/bless-frontier-peoples/id1624027417', '_system');
+          }
+        }
+      }
+    });
     await SplashScreen.show({
       showDuration: 2000,
-      autoHide: true
+      autoHide: true 
     });    
     this.storage.getSingleObjectString(StorageListModel.language).then((data)=>{
       if(data){
@@ -69,5 +83,15 @@ export class AppComponent {
     })
   }
 
+  async showUpdateDialog(){
+    const result = await ActionSheet.showActions({
+      title: "Update Avaliable",
+      message: "There is a new update available.",
+      options: [{
+        title: "Go to store",
+      }], 
+    });
+    return result;
+  }
 
 }
