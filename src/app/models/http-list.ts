@@ -11,6 +11,6 @@ export const HttpListModel = {
         return `/countries/${id}.json`
     },
     submitPray(id: string) {
-        return `http://demo.gremza.com/pray/post.php?key=1&pid=${id}&submit=submit`
+        return `https://pray.blessfrontierpeoples.org/post.php?key=1&pid=${id}&submit=submit`
     }
 }

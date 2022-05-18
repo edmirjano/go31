@@ -52,10 +52,10 @@ export class AppComponent {
         }
       }
     });
-    await SplashScreen.show({
-      showDuration: 2000,
-      autoHide: true 
-    });    
+    // await SplashScreen.show({
+    //   showDuration: 2000,
+    //   autoHide: true 
+    // });    
     this.storage.getSingleObjectString(StorageListModel.language).then((data)=>{
       if(data){
         this.navCtrl.navigateRoot("");
