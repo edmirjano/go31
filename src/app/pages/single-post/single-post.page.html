@@ -14,8 +14,8 @@
 </ion-header>
 <ion-content>
   <div *ngIf="post">
-    <app-slider *ngIf="joshuaCountry"
-      [images]="[joshuaCountry.PeopleGroupPhotoURL,post.acf.image_2? post.acf.image_2?.sizes.large : '',post.acf.image_3 ? post.acf.image_3?.sizes.large: '']">
+    <app-slider
+      [images]="images">
     </app-slider>
     <app-post-title [title]="post.title.rendered" [audio]="audioUrl"></app-post-title>
     <app-general-info [data]="generalInfoData"></app-general-info>

@@ -15,13 +15,14 @@ export class PostTitleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.player._init(this.audio);
-    this.player.audioObj.onended = () => {
-      this.play();
-    }
+    setTimeout(() => {
+      this.player._init(this.audio);
+      this.player.audioObj.onended = () => {
+        this.play();
+      }
+    }, 1000);
   }
 
-  
   play(){
     if(this.isPlayingMusic){
       this.player.pause();

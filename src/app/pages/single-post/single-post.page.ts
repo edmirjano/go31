@@ -34,6 +34,7 @@ export class SinglePostPage implements OnInit {
   prayingTodayNumber: number;
   disablePrayButton: boolean;
   joshuaCountry: JoshuaGroupModel;
+  images: string[];
   //#endregion
   constructor(
     private wp: WpService,
@@ -46,11 +47,15 @@ export class SinglePostPage implements OnInit {
     this.post = this.joshuaGroup = undefined;
     this.route.queryParams.subscribe((params)=>{
       if(params.fromList){
-        this.post = this.router.getCurrentNavigation().extras.state.post;
+        this.post = this.router.getCurrentNavigation().extras.state.post; 
+        this.images = [this.post.featured_image_src,this.post.acf.image_2? this.post.acf.image_2?.sizes.large : '',this.post.acf.image_3 ? this.post.acf.image_3?.sizes.large: ''];
+        this.images = this.images.filter((img)=>{ return img.length > 0});
         this.loadJoshua(this.post);
       } else {
         this.wp.getTodayPost().then((data: PostModel)=>{
           this.post = data;
+          this.images = [this.post.featured_image_src,this.post.acf.image_2? this.post.acf.image_2?.sizes.large : '',this.post.acf.image_3 ? this.post.acf.image_3?.sizes.large: ''];
+          this.images = this.images.filter((img)=>{ return img.length > 0});
           this.loadJoshua(this.post);
         });
       }
@@ -110,10 +115,12 @@ export class SinglePostPage implements OnInit {
   }
 
   onPrayClick(){
-    this.wp.addPraying(this.post.acf.id).then(async (data)=>{
+    if(!this.disablePrayButton){
       this.disablePrayButton = true;
       this.prayingTodayNumber++;
-    });
+      this.wp.addPraying(this.post.acf.id).then(async (data)=>{
+      });
+    }
   }
   //#endregion
 }

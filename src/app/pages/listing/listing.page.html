@@ -13,7 +13,7 @@
   <ion-card-header>
     <ion-card-subtitle>{{ post.title.rendered }}</ion-card-subtitle>
     <!-- <ion-card-title>Awesome Title</ion-card-title> -->
-    <ion-img *ngIf="post.acf.image_2?.sizes?.large" [src]="post.acf.image_2?.sizes.large"></ion-img>
+    <ion-img *ngIf="post.featured_image_src" [src]="post.featured_image_src"></ion-img>
   </ion-card-header>
   <ion-card-content>
     {{trimInfo(post.acf?.information)}}

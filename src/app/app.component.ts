@@ -10,6 +10,7 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { NotificationService } from './services/notification/notification.service';
 import { App } from '@capacitor/app';
 import { ActionSheet } from '@capacitor/action-sheet';
+import { StatusBar, Style } from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,7 @@ export class AppComponent {
 
   async _initApp(){
     // this.storage.clearAll();
+    await StatusBar.setStyle({ style: Style.Dark });
     const info = await App.getInfo();
     this.wp.getLanguages().then(async (data)=>{
       if(Number(info.version) < Number(data.acf.version_check)){

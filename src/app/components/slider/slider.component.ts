@@ -10,7 +10,5 @@ export class SliderComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.images = this.images.filter((img)=>{ return img.length > 0})
   }
-
 }

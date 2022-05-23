@@ -83,6 +83,7 @@ export interface PostModel {
     meta: any[];
     categories: number[];
     tags: any[];
+    featured_image_src: string;
     acf: Acf;
 }
 

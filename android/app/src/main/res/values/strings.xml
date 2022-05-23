@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Go31</string>
-    <string name="title_activity_main">Go31</string>
-    <string name="package_name">al.gremza.go31</string>
-    <string name="custom_url_scheme">al.gremza.go31</string>
+    <string name="app_name">Bless Frontier Peoples</string>
+    <string name="title_activity_main">Bless Frontier Peoples</string>
+    <string name="package_name">al.gremza.bless</string>
+    <string name="custom_url_scheme">al.gremza.bless</string>
 </resources>

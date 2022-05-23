@@ -1,5 +1,5 @@
 <ion-card>
-  <ion-slides>
+  <ion-slides  [pager]="true">
     <ion-slide *ngFor="let img of images">
       <img *ngIf="img" [src]="img" />
     </ion-slide>
