@@ -11,9 +11,9 @@ import { StorageService } from '../storage/storage.service';
 export class HttpService extends StorageService {
   constructor(@Inject(String) private _baseurl: string) {
     super();
-    if(this._baseurl === "wp"){
-      this.getSingleObjectString(StorageListModel.path).then((data)=>{
-        if(!data){
+    if (this._baseurl === "wp") {
+      this.getSingleObjectString(StorageListModel.path).then((data) => {
+        if (!data) {
           this._baseurl = environment.BASE_URL_WORDPRESS
         } else {
           this._baseurl = data;
@@ -22,30 +22,35 @@ export class HttpService extends StorageService {
     }
   }
 
-  protected async get(endpoint: string, forced?: boolean, params?: HttpParams,useFullURL?: boolean): Promise<any>{
-    // const savedData = await this.getSingleObject(endpoint);
-    // if(savedData && !forced){
-    //   return savedData;
-    // }
+  protected async get(endpoint: string, saveLocally?: boolean, params?: HttpParams, useFullURL?: boolean): Promise<any> {
+    if (saveLocally) {
+      const savedData = await this.getSingleObject(endpoint);
+      if (savedData) {
+        return savedData;
+      }
+    }
     const headers: HttpHeaders = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT"
     };
-    if(useFullURL){
-      const response: HttpResponse = await Http.get({url: endpoint, headers, params});
+    if (useFullURL) {
+      const response: HttpResponse = await Http.get({ url: endpoint, headers, params });
       return response.data;
     }
-    const response: HttpResponse = await Http.get({url: this._baseurl + endpoint, headers, params});
+    const response: HttpResponse = await Http.get({ url: this._baseurl + endpoint, headers, params });
+    if (saveLocally) {
+      this.setSingleObject(endpoint, JSON.stringify(response.data));
+    }
     // this.setSingleObject(endpoint,JSON.stringify(response.data));
     return response.data;
   }
 
-  protected async download(endpoint: string, fileName?: string): Promise<HttpDownloadFileResult>{
+  protected async download(endpoint: string, fileName?: string): Promise<HttpDownloadFileResult> {
     const options = {
       url: this._baseurl + endpoint,
       filePath: fileName ? fileName : endpoint,
-      fileDirectory:  Directory.Data,
+      fileDirectory: Directory.Data,
     };
     const response: HttpDownloadFileResult = await Http.downloadFile(options);
     if (response.path) {
@@ -56,30 +61,4 @@ export class HttpService extends StorageService {
     }
     return response;
   }
-
-  // public async post(endpoint: string,data: any,page?: number, perPage?: number): Promise<HttpResponse>{
-  //   const headers: HttpHeaders = { "Content-Type": "application/json","Authorization": `Bearer ${token}` };
-  //   const params: HttpParams = page && perPage ? {page: page?.toString(), perPage: perPage?.toString()} : null;
-  //   const response: HttpResponse = await Http.post({url: environment.baseUrl + endpoint, headers, data, params});
-  //   return response;
-  // }
-  // public async put(endpoint: string,data: any): Promise<HttpResponse>{
-  //   const token: string = await this.getToken();
-  //   const headers: HttpHeaders = { "Content-Type": "application/json","Authorization": `Bearer ${token}` };
-  //   const response: HttpResponse = await Http.put({url: environment.baseUrl + endpoint, headers, data});
-  //   return response;
-  // }
-  // public async patch(endpoint: string,data: any): Promise<HttpResponse>{
-  //   const token: string = await this.getToken();
-  //   const headers: HttpHeaders = { "Content-Type": "application/json","Authorization": `Bearer ${token}` };
-  //   const response: HttpResponse = await Http.patch({url: environment.baseUrl + endpoint, headers, data});
-  //   return response;
-  // }
-  // public async delete(endpoint: string): Promise<HttpResponse>{
-  //   const token: string = await this.getToken();
-  //   const headers: HttpHeaders = { "Content-Type": "application/json","Authorization": `Bearer ${token}` };
-  //   const response: HttpResponse = await Http.del({url: environment.baseUrl + endpoint, headers});
-  //   return response;
-  // }
-
 }

@@ -3,5 +3,6 @@ export const StorageListModel = {
     languageData: "Go31LanguageData",
     path: "Go31BasePath",
     notificationOptions: "Go31NotificationOptions",
-    notificationPermission: "Go32NotificationPermission"
+    notificationPermission: "Go32NotificationPermission",
+    notificationsScheduled: "Go32NotificationsScheduled",
 }

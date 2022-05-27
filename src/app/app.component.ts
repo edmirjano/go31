@@ -54,10 +54,6 @@ export class AppComponent {
         }
       }
     });
-    // await SplashScreen.show({
-    //   showDuration: 2000,
-    //   autoHide: true 
-    // });    
     this.storage.getSingleObjectString(StorageListModel.language).then((data)=>{
       if(data){
         this.navCtrl.navigateRoot("");
@@ -68,6 +64,7 @@ export class AppComponent {
     this.langData = await this.language.getLanguageData();
     await this.getMenuItems();
     this.notification._init();
+    
     // await SplashScreen.hide();
   }
   

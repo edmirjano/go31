@@ -7,6 +7,7 @@ import { PrayingModel } from 'src/app/models/praying.model';
 import { StorageListModel } from 'src/app/models/storage-list';
 import { environment } from 'src/environments/environment.prod';
 import { HttpService } from '../http/http.service';
+import { NotificationService } from '../notification/notification.service';
 import { StorageService } from '../storage/storage.service';
 
 @Injectable({
@@ -14,6 +15,7 @@ import { StorageService } from '../storage/storage.service';
 })
 export class WpService extends HttpService {
   constructor(
+    private notifications: NotificationService,
   ) {
     super("wp");
   }
@@ -45,7 +47,8 @@ export class WpService extends HttpService {
   }
 
   async getAllPosts(): Promise<PostModel[]>{
-    return this.get(HttpListModel.allPosts).then((data)=>{
+    return this.get(HttpListModel.allPosts,true).then((data)=>{
+      this.notifications.initNotifications(data);
       return data;
     });
   }
