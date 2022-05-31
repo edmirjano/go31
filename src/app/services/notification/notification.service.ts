@@ -28,18 +28,20 @@ export class NotificationService {
   async initNotifications(posts: PostModel[]) {
     const notificaitonsScheduled = await this.storage.getSingleObject(StorageListModel.notificationsScheduled);
     if (!notificaitonsScheduled) {
-      posts.forEach(async post => {
-        let options: ScheduleOptions = {
-          notifications: []
-        };
+      let options: ScheduleOptions = {
+        notifications: []
+      };
+      posts.forEach(post => {
         const scheduleOn: ScheduleOn = {
-          day: post.acf.post_number,
-          hour: 19,
-          minute: 34
+          day: Number(post.acf.post_number),
+          hour: 11,
+          minute: 45
         }
+
         const schedule: Schedule = {
           repeats: true,
           every: 'month',
+          // at: scheduleOn,
           allowWhileIdle: true,
           on: scheduleOn
         };
@@ -50,10 +52,8 @@ export class NotificationService {
           schedule: schedule
         };
         options.notifications.push(localNotificationSchema);
-        await LocalNotifications.schedule(options);
       });
-      // alert(JSON.stringify(options));
-
+      await LocalNotifications.schedule(options);
     }
   }
 
