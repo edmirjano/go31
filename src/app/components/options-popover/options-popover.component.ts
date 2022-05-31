@@ -17,7 +17,7 @@ export class OptionsPopoverComponent implements OnInit {
     await Share.share({
       title: this.post.title.rendered,
       text: this.post.excerpt.rendered,
-      url: this.post.guid.rendered,
+      url: this.post.link,
     });
   }
 }

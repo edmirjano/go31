@@ -38,6 +38,7 @@
     "@capacitor/action-sheet": "^1.0.8",
     "@capacitor/android": "3.4.3",
     "@capacitor/app": "^1.1.1",
+    "@capacitor/browser": "^1.0.7",
     "@capacitor/core": "3.4.3",
     "@capacitor/device": "^1.1.2",
     "@capacitor/filesystem": "^1.1.0",

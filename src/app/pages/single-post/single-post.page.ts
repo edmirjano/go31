@@ -7,9 +7,11 @@ import { JoshuaGroupModel } from 'src/app/models/joshua-group.model';
 import { Lang } from 'src/app/models/language.model';
 import { PostModel } from 'src/app/models/post.model';
 import { PrayingModel } from 'src/app/models/praying.model';
+import { StorageListModel } from 'src/app/models/storage-list';
 import { JoshuaService } from 'src/app/services/joshua/joshua.service';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { PlayerService } from 'src/app/services/player/player.service';
+import { StorageService } from 'src/app/services/storage/storage.service';
 import { WpService } from 'src/app/services/wp/wp.service';
 
 @Component({
@@ -25,7 +27,7 @@ export class SinglePostPage implements OnInit {
   // public ActiveSegmentEnum = ActiveSegmentEnum;
   post: PostModel;
   joshuaGroup: Array<JoshuaGroupModel>;
-  generalInfoData: Record<string,string>;
+  generalInfoData: Array<{ key: string, value: string}>;
   country: string;
   private readonly prayingLink: string = "https://demo.gremza.com/pray/post.php?key=1";
   praying:  PrayingModel;
@@ -42,10 +44,11 @@ export class SinglePostPage implements OnInit {
     public popoverController: PopoverController,
     public route: ActivatedRoute,
     public router: Router,
-    private language: LanguageService
+    private language: LanguageService,
+    private storage: StorageService
   ) { 
-    this.post = this.joshuaGroup = undefined;
     this.route.queryParams.subscribe((params)=>{
+      this.post = this.generalInfoData = this.joshuaMap = this.audioUrl = undefined;
       if(params.fromList){
         this.post = this.router.getCurrentNavigation().extras.state.post; 
         this.images = [this.post.featured_image_src,this.post.acf.image_2? this.post.acf.image_2?.sizes.large : '',this.post.acf.image_3 ? this.post.acf.image_3?.sizes.large: ''];
@@ -59,7 +62,15 @@ export class SinglePostPage implements OnInit {
           this.loadJoshua(this.post);
         });
       }
+      this.storage.getSingleObject(StorageListModel.todayPostPraying).then((postPraying)=>{
+        if(Number(postPraying.id) == this.post.id && postPraying.date == new Date().getDate()){
+          this.disablePrayButton = true;
+        } else {
+          this.disablePrayButton = false;
+        }
+      });
     });
+   
   }
 
   async ngOnInit() {
@@ -89,19 +100,17 @@ export class SinglePostPage implements OnInit {
   }
 
   getGeneraInfoData(data: Array<JoshuaGroupModel>){
-    let toReturn;
+    let toReturn: Array<{ key: string, value: string}>;
     data.forEach((group)=>{
       if(group.ROG3 == this.country){
         this.joshuaCountry = group;
-        toReturn = {
-          [this.langData.PeopNameInCountry]: group.PeopNameInCountry,
-          [this.langData.Population]: group.Population.toString(),
-          [this.langData.PrimaryReligion]: group.PrimaryReligion,
-          [this.langData.PrimaryLanguageName]: group.PrimaryLanguageName,
-          [this.langData.PercentChristianPGAC]: group.PercentChristianPGAC,
-          [this.langData.PercentEvangelicalPGAC]: group.PercentEvangelicalPGAC
-        };
-        this.joshuaMap = group.EthnolinguisticMap;
+        toReturn = new Array(); 
+        toReturn.push({ key: this.langData.Population, value: group.Population.toLocaleString()});
+        toReturn.push({ key: this.langData.PrimaryLanguageName, value: group.PrimaryLanguageName});
+        toReturn.push({ key: this.langData.PrimaryReligion, value: group.PrimaryReligion});
+        toReturn.push({ key: this.langData.PercentEvangelicalPGAC, value: (Number(group.PercentEvangelicalPGAC) * 100) + " %"});
+        toReturn.push({ key: this.langData.PeopNameInCountry, value: group.PeopNameInCountry});
+        this.joshuaMap = group?.EthnolinguisticMap;
       }
     });
     return toReturn;
@@ -118,6 +127,7 @@ export class SinglePostPage implements OnInit {
     if(!this.disablePrayButton){
       this.disablePrayButton = true;
       this.prayingTodayNumber++;
+      this.storage.setSingleObject(StorageListModel.todayPostPraying, JSON.stringify({ id: String(this.post.id), date: new Date().getDate() }));
       this.wp.addPraying(this.post.acf.id).then(async (data)=>{
       });
     }

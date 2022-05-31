@@ -12,6 +12,7 @@ def capacitor_pods
   pod 'CapacitorCommunityHttp', :path => '../../node_modules/@capacitor-community/http'
   pod 'CapacitorActionSheet', :path => '../../node_modules/@capacitor/action-sheet'
   pod 'CapacitorApp', :path => '../../node_modules/@capacitor/app'
+  pod 'CapacitorBrowser', :path => '../../node_modules/@capacitor/browser'
   pod 'CapacitorDevice', :path => '../../node_modules/@capacitor/device'
   pod 'CapacitorFilesystem', :path => '../../node_modules/@capacitor/filesystem'
   pod 'CapacitorHaptics', :path => '../../node_modules/@capacitor/haptics'

@@ -22,6 +22,8 @@ export class PostTitleComponent implements OnInit {
       }
     }, 1000);
   }
+  ngOnDestroy(): void {
+  }
 
   play(){
     if(this.isPlayingMusic){

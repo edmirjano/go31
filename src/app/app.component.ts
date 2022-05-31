@@ -11,6 +11,7 @@ import { NotificationService } from './services/notification/notification.servic
 import { App } from '@capacitor/app';
 import { ActionSheet } from '@capacitor/action-sheet';
 import { StatusBar, Style } from '@capacitor/status-bar';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-root',
@@ -33,19 +34,19 @@ export class AppComponent {
     this._initApp();
   }
 
-  openPage(link: string){
+  openPage(link: string) {
     this.navCtrl.navigateForward(link);
     this.menuCtrl.close();
   }
 
-  async _initApp(){
+  async _initApp() {
     // this.storage.clearAll();
     await StatusBar.setStyle({ style: Style.Dark });
     const info = await App.getInfo();
-    this.wp.getLanguages().then(async (data)=>{
-      if(Number(info.version) < Number(data.acf.version_check)){
+    this.wp.getLanguages().then(async (languageData) => {
+      if (Number(info.version) < Number(languageData.acf.version_check)) {
         const res = await this.showUpdateDialog();
-        if(res){
+        if (res) {
           if (this.platform.is('android')) {
             window.open('https://play.google.com/store/apps/details?id=com.gemrza.bfp', '_system');
           } else if (this.platform.is('ios')) {
@@ -53,42 +54,52 @@ export class AppComponent {
           }
         }
       }
+      this.storage.getSingleObjectString(StorageListModel.postVersion).then((postVersion) => {
+        if (postVersion) {
+          if (Number(postVersion) < Number(languageData.acf.post_version)) {
+            this.storage.setSingleObject(StorageListModel.postVersion, String(languageData.acf.post_version))
+            this.storage.removeSingleObject(StorageListModel.allPosts);
+          }
+          return;
+        }
+        this.storage.setSingleObject(StorageListModel.postVersion, "1");
+      });
     });
-    this.storage.getSingleObjectString(StorageListModel.language).then((data)=>{
-      if(data){
+    this.storage.getSingleObjectString(StorageListModel.language).then((data) => {
+      if (data) {
         this.navCtrl.navigateRoot("");
-      } else{
+      } else {
         this.navCtrl.navigateRoot("welcome");
       }
     });
     this.langData = await this.language.getLanguageData();
     await this.getMenuItems();
     this.notification._init();
-    
     // await SplashScreen.hide();
   }
-  
-  openWebview(page: PageModel){
-    this.navCtrl.navigateForward("webview", {state: {page: page.content.rendered, title: page.title.rendered}})
-    this.menuCtrl.close();
+
+  async openWebview(page: PageModel) {
+    await Browser.open({ url: page.link });
+    // this.navCtrl.navigateForward("webview", { state: { page: page.content.rendered, title: page.title.rendered } })
+    // this.menuCtrl.close();
   }
 
-  async getMenuItems(): Promise<any>{
-    this.wp.getAllPages().then((data: PageModel[])=>{
+  async getMenuItems(): Promise<any> {
+    this.wp.getAllPages().then((data: PageModel[]) => {
       this.menuItems = data;
-      this.menuItems = this.menuItems.filter((item)=>{
-        return item.acf.show_to_menu
+      this.menuItems = this.menuItems.filter((item) => {
+        return item.acf.show_to_menu;
       });
     })
   }
 
-  async showUpdateDialog(){
+  async showUpdateDialog() {
     const result = await ActionSheet.showActions({
       title: "Update Avaliable",
       message: "There is a new update available.",
       options: [{
         title: "Go to store",
-      }], 
+      }],
     });
     return result;
   }

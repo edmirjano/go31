@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActionSheet, ActionSheetButton } from '@capacitor/action-sheet';
 import { NavController } from '@ionic/angular';
 import { Lang, LanguageModel } from 'src/app/models/language.model';
 import { StorageListModel } from 'src/app/models/storage-list';
@@ -27,6 +28,7 @@ export class WelcomePage implements OnInit {
       Object.entries(this.languages.acf.language_list).forEach(lang => {
         const [key, value] = lang;
         this.langArray.push(value);
+        this.openAction();
       });
     })
   }
@@ -35,4 +37,23 @@ export class WelcomePage implements OnInit {
     await this.language._init(lang, path, langData);
     this.navCtrl.navigateForward("");
   }
+
+  async openAction(){
+    let options: ActionSheetButton[] = [];
+    this.langArray.forEach((lang, index) => {
+      options.push({
+        title: lang.lang_name,
+      });
+    });
+    const result = await ActionSheet.showActions({
+      title: "Language",
+      message: "Please select your language",
+      options: options,
+    });
+    if (result) {
+      const selectedLang: Lang = this.langArray.filter((lang, index) => result.index === index)[0];
+      this.setLang(selectedLang.lang_name, selectedLang.path,selectedLang);
+    }
+    return result;
+  };
 }

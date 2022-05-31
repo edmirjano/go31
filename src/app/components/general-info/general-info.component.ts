@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./general-info.component.scss'],
 })
 export class GeneralInfoComponent implements OnInit {
-  @Input() data: Record<string,string>;
+  @Input() data: Array<{ key: string, value: string}>;
   constructor() { }
 
   ngOnInit() {

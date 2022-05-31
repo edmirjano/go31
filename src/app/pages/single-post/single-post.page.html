@@ -17,18 +17,19 @@
     <app-slider
       [images]="images">
     </app-slider>
-    <app-post-title [title]="post.title.rendered" [audio]="audioUrl"></app-post-title>
+    <app-post-title *ngIf="audioUrl" [title]="post.title.rendered" [audio]="audioUrl"></app-post-title>
     <app-general-info [data]="generalInfoData"></app-general-info>
     <app-paragraph [content]="post.acf.information"></app-paragraph>
+    <app-paragraph [title]="langData.Resources" [content]="post.acf.resources"></app-paragraph>
     <ion-img [src]="post.acf.map ? post.acf.map : joshuaMap"></ion-img>
   </div>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button fill="solid" (click)="onPrayClick()" [disabled]="disablePrayButton">
-        <ion-icon slot="start" name="book-outline"></ion-icon>
-        {{langData ? langData.pray : "Pray"}}&nbsp;
+      <ion-button fill="outline" (click)="onPrayClick()" [disabled]="disablePrayButton">
+        <!-- <ion-icon slot="start" name="book-outline"></ion-icon> -->
+        &nbsp;{{langData ? disablePrayButton ? "Im Praying" : langData.pray : "Pray"}}&nbsp;
       </ion-button>
     </ion-buttons>
     <ion-text color="primary" class="ion-padding-start">

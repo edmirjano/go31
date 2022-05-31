@@ -8,4 +8,5 @@ export interface PrayingModel {
     pray: string;
     date: string;
     PeopleID: string;
+    total: string;
 }

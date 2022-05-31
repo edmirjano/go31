@@ -34,26 +34,26 @@ export class NotificationService {
       posts.forEach(post => {
         const scheduleOn: ScheduleOn = {
           day: Number(post.acf.post_number),
-          hour: 13,
-          minute: 0
+          hour: 14,
+          minute: 28
         }
 
         const schedule: Schedule = {
           repeats: true,
           every: 'month',
-          // at: scheduleOn,
           allowWhileIdle: true,
           on: scheduleOn
         };
         const localNotificationSchema: LocalNotificationSchema = {
           id: post.id,
-          title: post.title.rendered,
+          title: post.acf.push_notification_title,
           body: post.excerpt.rendered,
           schedule: schedule
         };
         options.notifications.push(localNotificationSchema);
       });
       await LocalNotifications.schedule(options);
+      this.storage.setSingleObject(StorageListModel.notificationsScheduled, "1");
     }
   }
 

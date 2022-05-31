@@ -44,6 +44,8 @@ export interface Acf {
     information: string;
     map: string; //link
     news: string;
+    push_notification_title: string;
+    resources: string;
 }
 export interface Title {
     rendered: string;

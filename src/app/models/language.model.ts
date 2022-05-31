@@ -1,5 +1,6 @@
 export interface Acf {
     language_list: LanguageList;
+    post_version: number;
     version_check: string;
 }
 export interface LanguageList {
@@ -17,6 +18,7 @@ export interface Lang {
     PercentChristianPGAC: string;
     PercentEvangelicalPGAC: string;
     pray: string;
+    ImPraying: string;
     prayingtoday: string;
     notifications: string;
     language: string;
@@ -25,6 +27,8 @@ export interface Lang {
     allow_noticications: string;
     change: string;
     all_posts: string;
+    index: number;
+    Resources: string;
 }
 
 export interface LanguageModel {

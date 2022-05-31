@@ -16,6 +16,7 @@ import { StorageService } from '../storage/storage.service';
 export class WpService extends HttpService {
   constructor(
     private notifications: NotificationService,
+    private storage: StorageService,
   ) {
     super("wp");
   }
