@@ -34,8 +34,8 @@ export class NotificationService {
       posts.forEach(post => {
         const scheduleOn: ScheduleOn = {
           day: Number(post.acf.post_number),
-          hour: 11,
-          minute: 45
+          hour: 13,
+          minute: 0
         }
 
         const schedule: Schedule = {
