@@ -40,7 +40,7 @@ export class AppComponent {
   }
 
   async _initApp() {
-    // this.storage.clearAll();
+    this.storage.clearAll();
     await StatusBar.setStyle({ style: Style.Dark });
     const info = await App.getInfo();
     this.wp.getLanguages().then(async (languageData) => {

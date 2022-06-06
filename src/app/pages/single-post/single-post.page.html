@@ -20,8 +20,8 @@
     <app-post-title *ngIf="audioUrl" [title]="post.title.rendered" [audio]="audioUrl"></app-post-title>
     <app-general-info [data]="generalInfoData"></app-general-info>
     <app-paragraph [content]="post.acf.information"></app-paragraph>
-    <app-paragraph [title]="langData.Resources" [content]="post.acf.resources"></app-paragraph>
     <ion-img [src]="post.acf.map ? post.acf.map : joshuaMap"></ion-img>
+    <app-paragraph [title]="langData.resources" [content]="post.acf.resources"></app-paragraph>
   </div>
 </ion-content>
 <ion-footer>
@@ -29,11 +29,14 @@
     <ion-buttons slot="start">
       <ion-button fill="outline" (click)="onPrayClick()" [disabled]="disablePrayButton">
         <!-- <ion-icon slot="start" name="book-outline"></ion-icon> -->
-        &nbsp;{{langData ? disablePrayButton ? "Im Praying" : langData.pray : "Pray"}}&nbsp;
+        &nbsp;{{langData ? disablePrayButton ? langData.im_praying : langData.pray : "Pray"}}&nbsp;
       </ion-button>
     </ion-buttons>
     <ion-text color="primary" class="ion-padding-start">
       {{prayingTodayNumber}} {{langData ? langData.prayingtoday : "praying today"}}
+    </ion-text>
+    <ion-text color="primary" class="ion-padding-start">
+      {{totalPraying}} {{langData ? langData.praying_total : "praying today"}}
     </ion-text>
   </ion-toolbar>
 </ion-footer>

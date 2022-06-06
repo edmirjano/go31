@@ -35,8 +35,8 @@ export class WpService extends HttpService {
   }
 
 
-  async getPraying(): Promise<PrayingModel[]>{
-    return this.get(environment.PRAYING_URL,false,null,true).then((data: PrayingModel[])=>{
+  async getPraying(): Promise<PrayingModel>{
+    return this.get(environment.PRAYING_URL,false,null,true).then((data: PrayingModel)=>{
       return data;
     })
   }

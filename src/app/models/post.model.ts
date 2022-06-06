@@ -87,5 +87,7 @@ export interface PostModel {
     tags: any[];
     featured_image_src: string;
     acf: Acf;
+    praying_today: number;
+    praying_total: number;
 }
 

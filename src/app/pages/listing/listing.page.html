@@ -9,14 +9,20 @@
 </ion-header>
 
 <ion-content>
-<ion-card *ngFor="let post of posts" (click)="openPost(post)">
-  <ion-card-header>
-    <ion-card-subtitle>{{ post.title.rendered }}</ion-card-subtitle>
-    <!-- <ion-card-title>Awesome Title</ion-card-title> -->
-    <ion-img *ngIf="post.featured_image_src" [src]="post.featured_image_src"></ion-img>
-  </ion-card-header>
-  <ion-card-content>
-    {{trimInfo(post.acf?.information)}}
-  </ion-card-content>
-</ion-card>
+  <ion-item *ngFor="let post of posts" (click)="openPost(post)">
+    <ion-thumbnail slot="start">
+      <img *ngIf="post.featured_image_src" [src]="post.featured_image_src" />
+    </ion-thumbnail>
+    <ion-label>
+      <div class="title">{{ post.title.rendered }}</div>
+      <div>
+        <ion-text color="primary" class="ion-padding-start">
+          {{post.praying_today}} {{langData ? langData.prayingtoday : "praying today"}}
+        </ion-text>
+        <ion-text color="primary" class="ion-padding-start">
+          {{post.praying_total}} {{langData ? langData.praying_total : "praying today"}}
+        </ion-text>
+      </div>
+    </ion-label>
+  </ion-item>
 </ion-content>

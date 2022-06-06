@@ -18,7 +18,6 @@ export interface Lang {
     PercentChristianPGAC: string;
     PercentEvangelicalPGAC: string;
     pray: string;
-    ImPraying: string;
     prayingtoday: string;
     notifications: string;
     language: string;
@@ -28,7 +27,10 @@ export interface Lang {
     change: string;
     all_posts: string;
     index: number;
-    Resources: string;
+    resources: string;
+    workers_needed: string;
+    praying_total: string;
+    im_praying: string;
 }
 
 export interface LanguageModel {
