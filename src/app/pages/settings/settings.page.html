@@ -21,16 +21,17 @@
         <ion-input type="text" [(ngModel)]="userTimeZone" class="ion-text-right" [disabled]="!allowNotifications" readonly></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>{{ selectedDate | date: "HH:mm"}}</ion-label>
+        <ion-label>{{ selectedTime | date: "hh:mm"}}</ion-label>
         <ion-button [disabled]="!allowNotifications" id="open-date-input">Change</ion-button>
         <ion-popover #popover trigger="open-date-input" show-backdrop="false">
           <ng-template>
-            <ion-datetime #time presentation="time" size="cover" [value]="selectedDate"
-              (ionChange)="changeDate(time.value)">
-              <ion-buttons slot="buttons">
-                <ion-button (click)="confirm()" fill="outline" color="primary">Select</ion-button>
+            <ion-datetime #time presentation="time" size="cover"
+            [(ngModel)]="selectedTime"
+              (ionChange)="changeDate(time.value)" [showDefaultButtons]="true">
+              <!-- <ion-buttons slot="buttons">
+                <ion-button (click)="confirm($event)" fill="outline" color="primary">Select</ion-button>
                 <ion-button (click)="reset()" fill="outline" color="danger">Reset</ion-button>
-              </ion-buttons>
+              </ion-buttons> -->
             </ion-datetime>
           </ng-template>
         </ion-popover>

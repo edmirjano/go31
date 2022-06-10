@@ -31,6 +31,7 @@ export interface Lang {
     workers_needed: string;
     praying_total: string;
     im_praying: string;
+    praying: string;
 }
 
 export interface LanguageModel {

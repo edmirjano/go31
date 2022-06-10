@@ -13,16 +13,24 @@
     <ion-thumbnail slot="start">
       <img *ngIf="post.featured_image_src" [src]="post.featured_image_src" />
     </ion-thumbnail>
-    <ion-label>
-      <div class="title">{{ post.title.rendered }}</div>
-      <div>
-        <ion-text color="primary" class="ion-padding-start">
-          {{post.praying_today}} {{langData ? langData.prayingtoday : "praying today"}}
+    <ion-label >
+      <div class="title ion-text-wrap">{{ post.title.rendered }}</div>
+      <div class="spacer"></div>
+      <div class="prayings">
+        <ion-text class="praying">
+          {{langData ? langData.praying : "praying"}}:
         </ion-text>
-        <ion-text color="primary" class="ion-padding-start">
-          {{post.praying_total}} {{langData ? langData.praying_total : "praying today"}}
+        <ion-text color="primary">
+           {{langData ? langData.prayingtoday : "praying today"}} <span class="praying">{{post.praying_today || post.praying_today == 0 ? post.praying_today : '###'}}</span> 
+        </ion-text>
+        <ion-text color="primary">
+          {{langData ? langData.praying_total : "praying today"}} <span class="praying">{{post.praying_total || post.praying_total == 0 ? post.praying_total : '####'}}</span>
         </ion-text>
       </div>
+      <!-- <ng-template class="prayings" #skeleton>
+        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      </ng-template> -->
     </ion-label>
   </ion-item>
+  <div class="spacer-bottom"></div>
 </ion-content>

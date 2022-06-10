@@ -109,7 +109,7 @@ export class SinglePostPage implements OnInit {
         toReturn.push({ key: this.langData.Population, value: group.Population.toLocaleString()});
         toReturn.push({ key: this.langData.PrimaryLanguageName, value: group.PrimaryLanguageName});
         toReturn.push({ key: this.langData.PrimaryReligion, value: group.PrimaryReligion});
-        toReturn.push({ key: this.langData.PercentEvangelicalPGAC, value: (Number(group.PercentEvangelicalPGAC) * 100) + " %"});
+        toReturn.push({ key: this.langData.PercentEvangelicalPGAC, value: group.PercentEvangelicalPGAC + " %"});
         toReturn.push({ key: this.langData.workers_needed, value: Math.round(group.Population/50000).toString()});
         // toReturn.push({ key: this.langData.PeopNameInCountry, value: group.PeopNameInCountry});
         this.joshuaMap = group?.EthnolinguisticMap;

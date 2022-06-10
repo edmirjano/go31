@@ -25,17 +25,21 @@ export class NotificationService {
     })
   }
 
-  async initNotifications(posts: PostModel[]) {
+  async initNotifications(posts: PostModel[], forced: boolean = false) {
+    let time: Date = new Date(await this.storage.getSingleObjectString(StorageListModel.notificationDate));
+    if(!time){
+      time = new Date();
+    }
     const notificaitonsScheduled = await this.storage.getSingleObject(StorageListModel.notificationsScheduled);
-    if (!notificaitonsScheduled) {
+    if (!notificaitonsScheduled || forced) {
       let options: ScheduleOptions = {
         notifications: []
       };
       posts.forEach(post => {
         const scheduleOn: ScheduleOn = {
           day: Number(post.acf.post_number),
-          hour: 14,
-          minute: 28
+          hour: time.getHours(),
+          minute: time.getMinutes()
         }
 
         const schedule: Schedule = {

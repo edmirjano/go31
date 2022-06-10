@@ -4,15 +4,30 @@ ion-item{
         width: 100px;
     }
     ion-label{
-        display: flex;
-        flex-direction: column;
-        // align-items: center;
-        justify-content: space-between;
-        top: 0;
-        
-        div.title{
+        // display: flex;
+        // flex-direction: column;
+        // // align-items: center;
+        // justify-content: space-between;
+        // top: 0; 
+        height: 90%;
+        width: 100%;
+        .title{
             font-weight: bold;
+        }
+        .spacer{
+            height: 15px;
+        }
+        .prayings{
+            text-align: right;
+            .praying{
+                font-weight: bold;
+            }
         }
 
     }
+}
+
+
+.spacer-bottom{
+    height: 100px;
 }

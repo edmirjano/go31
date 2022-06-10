@@ -3,6 +3,7 @@ import { IonDatetime, IonPopover } from '@ionic/angular';
 import { Lang, LanguageModel } from 'src/app/models/language.model';
 import { StorageListModel } from 'src/app/models/storage-list';
 import { LanguageService } from 'src/app/services/language/language.service';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { WpService } from 'src/app/services/wp/wp.service';
 
@@ -14,7 +15,7 @@ import { WpService } from 'src/app/services/wp/wp.service';
 export class SettingsPage implements OnInit {
   @ViewChild(IonPopover, { static: true }) popover: IonPopover;
   // @ViewChild(IonDatetime, { static: true }) time: IonDatetime;
-  selectedDate: string = new Date().toISOString();
+  selectedTime: string = new Date().toISOString();
   userTimeZone: any;
   allowNotifications: boolean;
   languages: LanguageModel;
@@ -24,7 +25,8 @@ export class SettingsPage implements OnInit {
   constructor(
     private wp: WpService,
     private storage: StorageService,
-    private language: LanguageService
+    private language: LanguageService,
+    private notification: NotificationService
   ) { }
 
   ngOnInit() {
@@ -47,25 +49,27 @@ export class SettingsPage implements OnInit {
         this.allowNotifications = true;
       }
     });
+    this.storage.getSingleObjectString(StorageListModel.notificationDate).then((data)=>{
+      if(data){
+        alert(data);
+        this.selectedTime = new Date(data).toISOString();
+      }
+    })
   }
 
-  confirm() {
+  confirm(event) {
     this.popover.dismiss();
   }
 
-  reset() {
-    this.popover.dismiss();
-    // this.datetime.nativeEl.reset();
-    // this.datetime.
-  }
-
-  changeDate(value: string) {
-    this.selectedDate = value;
+  async changeDate(value: string) {
+    const datetime = new Date(value);
+    this.selectedTime = datetime.toISOString();
+    await this.storage.setSingleObject(StorageListModel.notificationDate, datetime.toISOString());
+    await this.notification.initNotifications(await this.storage.getSingleObject(StorageListModel.allPosts), true);
   }
 
   async onLanguageChange(event){
     const lang = event.target.value;
-    alert(JSON.stringify(lang));
     const newLang = this.langArray.filter((data)=>{
       return data.lang_name = lang;
     })[0];

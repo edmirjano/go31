@@ -8,4 +8,5 @@ export const StorageListModel = {
     postVersion: "Go31PostVersion",
     allPosts: "posts?page=1&per_page=100&acf_format=standard",
     todayPostPraying: "Go31TodayPostPraying",
+    notificationDate: "Go31NotificationDate",
 }
