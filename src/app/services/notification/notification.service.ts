@@ -10,12 +10,9 @@ import { StorageService } from '../storage/storage.service';
 })
 export class NotificationService {
 
-  private _options: ScheduleOptions;
-
   constructor(
     private storage: StorageService
   ) { }
-
 
   async _init() {
     LocalNotifications.requestPermissions().then((data) => {
@@ -26,12 +23,14 @@ export class NotificationService {
   }
 
   async initNotifications(posts: PostModel[], forced: boolean = false) {
-    let time: Date = new Date(await this.storage.getSingleObjectString(StorageListModel.notificationDate));
-    if(!time){
-      time = new Date();
+    const savedTime = await this.storage.getSingleObjectString(StorageListModel.notificationDate);
+    let time: Date = new Date();
+    if(savedTime){
+      time = new Date(savedTime);
     }
     const notificaitonsScheduled = await this.storage.getSingleObject(StorageListModel.notificationsScheduled);
-    if (!notificaitonsScheduled || forced) {
+    const notificaitonsAllowed = await this.storage.getSingleObjectString(StorageListModel.notificationPermission);
+    if (notificaitonsAllowed == "1" && (!notificaitonsScheduled || forced)) {
       let options: ScheduleOptions = {
         notifications: []
       };
@@ -41,7 +40,6 @@ export class NotificationService {
           hour: time.getHours(),
           minute: time.getMinutes()
         }
-
         const schedule: Schedule = {
           repeats: true,
           every: 'month',
@@ -60,11 +58,4 @@ export class NotificationService {
       this.storage.setSingleObject(StorageListModel.notificationsScheduled, "1");
     }
   }
-
-  async getOptions(): Promise<NotificationOptionModel> {
-    return this.storage.getSingleObject(StorageListModel.notificationOptions).then((data: NotificationOptionModel) => {
-      return data;
-    })
-  }
-
 }

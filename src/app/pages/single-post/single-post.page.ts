@@ -71,7 +71,6 @@ export class SinglePostPage implements OnInit {
         }
       });
     });
-   
   }
 
   async ngOnInit() {

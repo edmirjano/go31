@@ -51,7 +51,6 @@ export class SettingsPage implements OnInit {
     });
     this.storage.getSingleObjectString(StorageListModel.notificationDate).then((data)=>{
       if(data){
-        alert(data);
         this.selectedTime = new Date(data).toISOString();
       }
     })
@@ -85,5 +84,6 @@ export class SettingsPage implements OnInit {
     } else {
       this.storage.removeSingleObject(StorageListModel.notificationPermission);
     }
+    this.notification._init();
   }
 }

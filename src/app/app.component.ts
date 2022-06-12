@@ -75,6 +75,9 @@ export class AppComponent {
     this.langData = await this.language.getLanguageData();
     await this.getMenuItems();
     this.notification._init();
+    App.addListener("appStateChange",()=>{
+      window.location.reload();
+    });
     // await SplashScreen.hide();
   }
 
