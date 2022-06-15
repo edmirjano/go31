@@ -20,9 +20,9 @@
         <ion-label position="fixed">{{langData.time_zone}}</ion-label>
         <ion-input type="text" [(ngModel)]="userTimeZone" class="ion-text-right" [disabled]="!allowNotifications" readonly></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item [disabled]="!allowNotifications">
         <ion-label>{{ selectedTime | date: "hh:mm"}}</ion-label>
-        <ion-button [disabled]="!allowNotifications" id="open-date-input">Change</ion-button>
+        <ion-button id="open-date-input">Change</ion-button>
         <ion-popover #popover trigger="open-date-input" show-backdrop="false">
           <ng-template>
             <ion-datetime #time presentation="time" size="cover"

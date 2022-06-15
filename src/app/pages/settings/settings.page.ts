@@ -6,6 +6,7 @@ import { LanguageService } from 'src/app/services/language/language.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { WpService } from 'src/app/services/wp/wp.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-settings',
@@ -15,13 +16,14 @@ import { WpService } from 'src/app/services/wp/wp.service';
 export class SettingsPage implements OnInit {
   @ViewChild(IonPopover, { static: true }) popover: IonPopover;
   // @ViewChild(IonDatetime, { static: true }) time: IonDatetime;
-  selectedTime: string = new Date().toISOString();
+  selectedTime: string | Date = new Date(environment.DEFAULT_DATE);
   userTimeZone: any;
   allowNotifications: boolean;
   languages: LanguageModel;
   langArray: Lang[] = [];
   currentLanguage: string;
   langData: Lang;
+  
   constructor(
     private wp: WpService,
     private storage: StorageService,
@@ -51,7 +53,8 @@ export class SettingsPage implements OnInit {
     });
     this.storage.getSingleObjectString(StorageListModel.notificationDate).then((data)=>{
       if(data){
-        this.selectedTime = new Date(data).toISOString();
+        alert()
+        this.selectedTime = new Date(data);
       }
     })
   }
@@ -62,8 +65,8 @@ export class SettingsPage implements OnInit {
 
   async changeDate(value: string) {
     const datetime = new Date(value);
-    this.selectedTime = datetime.toISOString();
-    await this.storage.setSingleObject(StorageListModel.notificationDate, datetime.toISOString());
+    this.selectedTime = datetime;
+    await this.storage.setSingleObject(StorageListModel.notificationDate, datetime.toString());
     await this.notification.initNotifications(await this.storage.getSingleObject(StorageListModel.allPosts), true);
   }
 
