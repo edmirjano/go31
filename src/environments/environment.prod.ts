@@ -5,5 +5,5 @@ export const environment = {
   PRAYING_URL_SUBMIT: "https://blessfrontierpeoples.org/wp-json/wp/v2/",
   BASE_URL_JOSHUA: "https://api.joshuaproject.net/v1/",
   JOSHUA_TOKEN: "749619dfa505",
-  DEFAULT_DATE: "2000-01-01T08:00:00.000Z"
+  DEFAULT_DATE: "2000-01-01T09:00:00.000Z"
 };

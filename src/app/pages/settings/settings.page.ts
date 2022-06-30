@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment.prod';
 export class SettingsPage implements OnInit {
   @ViewChild(IonPopover, { static: true }) popover: IonPopover;
   // @ViewChild(IonDatetime, { static: true }) time: IonDatetime;
-  selectedTime: string | Date = new Date(environment.DEFAULT_DATE);
+  selectedTime: string = this.changeTimeZone(new Date(environment.DEFAULT_DATE), 'Europe/Tirane').toString();
   userTimeZone: any;
   allowNotifications: boolean;
   languages: LanguageModel;
@@ -53,8 +53,7 @@ export class SettingsPage implements OnInit {
     });
     this.storage.getSingleObjectString(StorageListModel.notificationDate).then((data)=>{
       if(data){
-        alert()
-        this.selectedTime = new Date(data);
+        this.selectedTime = data;
       }
     })
   }
@@ -64,9 +63,8 @@ export class SettingsPage implements OnInit {
   }
 
   async changeDate(value: string) {
-    const datetime = new Date(value);
-    this.selectedTime = datetime;
-    await this.storage.setSingleObject(StorageListModel.notificationDate, datetime.toString());
+    this.selectedTime = value;
+    await this.storage.setSingleObject(StorageListModel.notificationDate, value);
     await this.notification.initNotifications(await this.storage.getSingleObject(StorageListModel.allPosts), true);
   }
 
@@ -88,5 +86,23 @@ export class SettingsPage implements OnInit {
       this.storage.removeSingleObject(StorageListModel.notificationPermission);
     }
     this.notification._init();
+  }
+
+
+
+  changeTimeZone(date, timeZone) {
+    if (typeof date === 'string') {
+      return new Date(
+        new Date(date).toLocaleString('en-US', {
+          timeZone,
+        }),
+      );
+    }
+  
+    return new Date(
+      date.toLocaleString('en-US', {
+        timeZone,
+      }),
+    );
   }
 }

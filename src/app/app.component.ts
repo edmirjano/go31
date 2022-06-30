@@ -21,6 +21,7 @@ import { Browser } from '@capacitor/browser';
 export class AppComponent {
   langData: Lang;
   menuItems: PageModel[];
+  version: string;
 
   constructor(
     private navCtrl: NavController,
@@ -43,6 +44,7 @@ export class AppComponent {
     // this.storage.clearAll();
     await StatusBar.setStyle({ style: Style.Dark });
     const info = await App.getInfo();
+    this.version = info.version;
     this.wp.getLanguages().then(async (languageData) => {
       if (Number(info.version) < Number(languageData.acf.version_check)) {
         const res = await this.showUpdateDialog();
