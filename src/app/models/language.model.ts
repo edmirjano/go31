@@ -32,6 +32,7 @@ export interface Lang {
     praying_total: string;
     im_praying: string;
     praying: string;
+    pray_today: string;
 }
 
 export interface LanguageModel {

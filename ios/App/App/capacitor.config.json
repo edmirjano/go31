@@ -2,5 +2,8 @@
 	"appId": "al.gremza.bless",
 	"appName": "Bless Frontier Peoples",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"server": {
+		"url": "http://localhost:8100"
+	}
 }

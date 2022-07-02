@@ -9,4 +9,5 @@ export const StorageListModel = {
     allPosts: "posts?page=1&per_page=100&acf_format=standard",
     todayPostPraying: "Go31TodayPostPraying",
     notificationDate: "Go31NotificationDate",
+    notificationList: "Go31NotificationList",
 }

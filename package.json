@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ios": "ionic build && ionic cap sync ios && ionic cap open ios",
-    "ios-run": "ionic capacitor run ios --livereload --external --consolelogs --serverlogs --open",
+    "ios-run": "ionic capacitor run ios --livereload --consolelogs --serverlogs --open",
     "ios-prod": "ionic build --prod && ionic cap sync ios && ionic cap open ios",
     "ios-dry-run": "ionic build && ionic cap sync ios",
     "android": "ionic build && ionic cap sync android && ionic cap open android",

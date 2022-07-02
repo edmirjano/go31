@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment.prod';
 export class SettingsPage implements OnInit {
   @ViewChild(IonPopover, { static: true }) popover: IonPopover;
   // @ViewChild(IonDatetime, { static: true }) time: IonDatetime;
-  selectedTime: string = this.changeTimeZone(new Date(environment.DEFAULT_DATE), 'Europe/Tirane').toString();
+  selectedTime: Date | string = new Date(environment.DEFAULT_DATE).toISOString();
   userTimeZone: any;
   allowNotifications: boolean;
   languages: LanguageModel;
@@ -53,7 +53,7 @@ export class SettingsPage implements OnInit {
     });
     this.storage.getSingleObjectString(StorageListModel.notificationDate).then((data)=>{
       if(data){
-        this.selectedTime = data;
+        this.selectedTime = new Date(data).toISOString();
       }
     })
   }
@@ -63,7 +63,7 @@ export class SettingsPage implements OnInit {
   }
 
   async changeDate(value: string) {
-    this.selectedTime = value;
+    this.selectedTime = new Date(value.slice(0, 19) +"Z").toISOString();
     await this.storage.setSingleObject(StorageListModel.notificationDate, value);
     await this.notification.initNotifications(await this.storage.getSingleObject(StorageListModel.allPosts), true);
   }
@@ -77,7 +77,6 @@ export class SettingsPage implements OnInit {
     this.currentLanguage = await this.storage.getSingleObjectString(StorageListModel.language);
   }
 
-
   allowNotificationChange(event){
     this.allowNotifications = event;
     if(this.allowNotifications){
@@ -86,23 +85,5 @@ export class SettingsPage implements OnInit {
       this.storage.removeSingleObject(StorageListModel.notificationPermission);
     }
     this.notification._init();
-  }
-
-
-
-  changeTimeZone(date, timeZone) {
-    if (typeof date === 'string') {
-      return new Date(
-        new Date(date).toLocaleString('en-US', {
-          timeZone,
-        }),
-      );
-    }
-  
-    return new Date(
-      date.toLocaleString('en-US', {
-        timeZone,
-      }),
-    );
   }
 }
