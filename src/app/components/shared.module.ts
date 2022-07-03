@@ -8,6 +8,7 @@ import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SliderComponent } from './slider/slider.component';
 import { PostTitleComponent } from './post-title/post-title.component';
 import { OptionsPopoverComponent } from './options-popover/options-popover.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -17,10 +18,11 @@ import { OptionsPopoverComponent } from './options-popover/options-popover.compo
         ParagraphComponent,
         SliderComponent,
         PostTitleComponent,
-        OptionsPopoverComponent
+        OptionsPopoverComponent,
     ],
     imports: [
         CommonModule,
+        FormsModule,
         IonicModule
     ],
     exports: [

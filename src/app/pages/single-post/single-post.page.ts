@@ -38,6 +38,7 @@ export class SinglePostPage implements OnInit {
   joshuaCountry: JoshuaGroupModel;
   images: string[];
   totalPraying: number = 0;
+  fontSize: number;
   //#endregion
   constructor(
     private wp: WpService,

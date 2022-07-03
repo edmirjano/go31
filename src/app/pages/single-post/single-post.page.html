@@ -13,9 +13,8 @@
   <ion-progress-bar type="indeterminate" *ngIf="!post || !generalInfoData"></ion-progress-bar>
 </ion-header>
 <ion-content>
-  <div *ngIf="post">
-    <app-slider
-      [images]="images">
+  <div *ngIf="post" >
+    <app-slider [images]="images">
     </app-slider>
     <app-post-title *ngIf="audioUrl" [title]="post.title.rendered" [audio]="audioUrl"></app-post-title>
     <app-general-info [data]="generalInfoData"></app-general-info>

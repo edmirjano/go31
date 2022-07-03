@@ -7,6 +7,7 @@ import { NotificationService } from 'src/app/services/notification/notification.
 import { StorageService } from 'src/app/services/storage/storage.service';
 import { WpService } from 'src/app/services/wp/wp.service';
 import { environment } from 'src/environments/environment.prod';
+import { ActionSheet, ActionSheetButton, ActionSheetButtonStyle } from '@capacitor/action-sheet';
 
 @Component({
   selector: 'app-settings',
@@ -85,5 +86,27 @@ export class SettingsPage implements OnInit {
       this.storage.removeSingleObject(StorageListModel.notificationPermission);
     }
     this.notification._init();
+  }
+
+
+  async onClearCache(){
+    const result = await ActionSheet.showActions({
+      title: "Cache",
+      message: "Do you really want to clear cache?",
+      options: [
+        {
+          title: 'Clear Cache',
+          style: ActionSheetButtonStyle.Destructive
+        },
+        {
+          title: 'Cancel',
+          style: ActionSheetButtonStyle.Cancel
+        }
+      ],
+    });
+    if (result.index === 0) {
+      this.storage.clearAll();
+      location.reload();
+    }
   }
 }
