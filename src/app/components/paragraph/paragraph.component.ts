@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ParagraphComponent implements OnInit {
   @Input() title: string;
   @Input() content: string;
+  @Input() showFontPicker: boolean;
   fontSize: number;
   constructor() { }
 

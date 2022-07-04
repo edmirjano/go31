@@ -18,7 +18,7 @@
     </app-slider>
     <app-post-title *ngIf="audioUrl" [title]="post.title.rendered" [audio]="audioUrl"></app-post-title>
     <app-general-info [data]="generalInfoData"></app-general-info>
-    <app-paragraph [content]="post.acf.information"></app-paragraph>
+    <app-paragraph [content]="post.acf.information" [showFontPicker]="true"></app-paragraph>
     <ion-img [src]="post.acf.map ? post.acf.map : joshuaMap"></ion-img>
     <app-paragraph [title]="langData.resources" [content]="post.acf.resources"></app-paragraph>
   </div>
